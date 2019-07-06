@@ -1,5 +1,7 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using OrchardCore.ContentManagement;
 using OrchardCore.Contents;
@@ -13,13 +15,16 @@ namespace OrchardCore.Content.Controllers
     {
         private readonly IContentManager _contentManager;
         private readonly IAuthorizationService _authorizationService;
+        private readonly IContentItemIdGenerator _idGenerator;
 
         public ApiController(
             IContentManager contentManager,
-            IAuthorizationService authorizationService)
+            IAuthorizationService authorizationService,
+            IContentItemIdGenerator idGenerator)
         {
             _authorizationService = authorizationService;
             _contentManager = contentManager;
+            _idGenerator = idGenerator;
         }
 
         [Route("{contentItemId}"), HttpGet]
@@ -62,6 +67,7 @@ namespace OrchardCore.Content.Controllers
         }
 
         [HttpPost]
+        [EnableCors("MyPolicy")]
         public async Task<IActionResult> Post(ContentItem newContentItem, bool draft = false)
         {
             var contentItem = await _contentManager.GetAsync(newContentItem.ContentItemId, VersionOptions.DraftRequired);
@@ -71,6 +77,11 @@ namespace OrchardCore.Content.Controllers
                 if (!await _authorizationService.AuthorizeAsync(User, Permissions.PublishContent))
                 {
                     return Unauthorized();
+                }
+
+                if (String.IsNullOrEmpty(newContentItem.ContentItemId))
+                {
+                    newContentItem.ContentItemId = _idGenerator.GenerateUniqueId(newContentItem);
                 }
 
                 await _contentManager.CreateAsync(newContentItem, VersionOptions.DraftRequired);

@@ -28,6 +28,13 @@ namespace OrchardCore.Apis.GraphQL
 
         public override void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             services.AddSingleton<IDependencyResolver, RequestServicesDependencyResolver>();
             services.AddSingleton<IDocumentExecuter, SerialDocumentExecuter>();
             services.AddSingleton<IDocumentWriter, DocumentWriter>();
@@ -43,6 +50,8 @@ namespace OrchardCore.Apis.GraphQL
             var exposeExceptions = _configuration.GetValue(
                 $"OrchardCore.Apis.GraphQL:{nameof(GraphQLSettings.ExposeExceptions)}",
                 _hostingEnvironment.IsDevelopment());
+
+            app.UseCors("MyPolicy");
 
             app.UseMiddleware<GraphQLMiddleware>(new GraphQLSettings
             {
