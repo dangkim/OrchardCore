@@ -23,6 +23,7 @@
 
     <ProjectReference Include="..\OrchardCore.Navigation\OrchardCore.Navigation.csproj" />
     <ProjectReference Include="..\OrchardCore.Settings\OrchardCore.Settings.csproj" />
+    <ProjectReference Include="..\OrchardCore.Users\OrchardCore.Users.csproj" />
   </ItemGroup>
 
   <ItemGroup>

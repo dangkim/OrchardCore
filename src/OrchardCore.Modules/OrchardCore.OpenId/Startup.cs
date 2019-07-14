@@ -58,6 +58,13 @@ namespace OrchardCore.OpenId
     {
         public override void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             services.AddSingleton<IOpenIdClientService, OpenIdClientService>();
             services.AddScoped<IDisplayDriver<ISite>, OpenIdClientSettingsDisplayDriver>();
 
@@ -176,6 +183,8 @@ namespace OrchardCore.OpenId
 
                 return configuration;
             }
+
+            app.UseCors("MyPolicy");
 
             var settings = GetServerSettingsAsync().GetAwaiter().GetResult();
             if (settings == null)
