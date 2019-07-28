@@ -313,5 +313,24 @@ namespace OrchardCore.Content.Controllers
 
             return Ok(contentItem);
         }
+
+        [HttpGet]
+        [ActionName("Post04")]
+        [EnableCors("MyPolicy")]
+        public IActionResult Post04()
+        {
+            if (User.HasClaim("Permission", "EditOwn_Brand"))
+            {
+                return Ok("Brand");
+            }
+
+            if (User.HasClaim("Permission", "EditOwn_Influencer"))
+            {
+                return Ok("Influencer");
+            }
+
+            return StatusCode(204);
+
+        }
     }
 }
