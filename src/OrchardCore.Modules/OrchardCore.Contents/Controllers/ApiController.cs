@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using OrchardCore.ContentManagement;
+using OrchardCore.ContentManagement.Models;
 using OrchardCore.Contents;
 using OrchardCore.Contents.Models;
 using OrchardCore.Users.Models;
@@ -268,12 +269,64 @@ namespace OrchardCore.Content.Controllers
         //    }
         //}
 
+        //[HttpPost]
+        //[ActionName("Post03")]
+        //[EnableCors("MyPolicy")]
+        //public async Task<IActionResult> Post03(ContentItem newContentItem, bool draft = false)
+        //{
+        //    var contentItem = await _contentManager.GetAsync(newContentItem.ContentItemId, VersionOptions.DraftRequired);
+
+        //    if (contentItem == null)
+        //    {
+        //        return StatusCode(204);
+        //    }
+        //    else
+        //    {
+        //        if (!await _authorizationService.AuthorizeAsync(User, Permissions.EditOwnContent, contentItem))
+        //        {
+        //            return Unauthorized();
+        //        }
+        //    }
+
+        //    if (contentItem != newContentItem)
+        //    {
+        //        //string json = contentItem.Content;
+        //        dynamic jsonObj = newContentItem.Content;
+        //        jsonObj["Influencer"]["ShareLink"]["Text"] = "650000";
+        //        //string output = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
+        //        //File.WriteAllText("settings.json", output);
+
+        //        contentItem.DisplayText = newContentItem.DisplayText;
+        //        contentItem.ModifiedUtc = newContentItem.ModifiedUtc;
+        //        contentItem.PublishedUtc = newContentItem.PublishedUtc;
+        //        contentItem.CreatedUtc = newContentItem.CreatedUtc;
+        //        contentItem.Owner = newContentItem.Owner;
+        //        contentItem.Author = newContentItem.Author;
+
+        //        contentItem.Apply(newContentItem);
+
+        //        await _contentManager.UpdateAsync(contentItem);
+        //    }
+
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    if (!draft)
+        //    {
+        //        await _contentManager.PublishAsync(contentItem);
+        //    }
+
+        //    return Ok(contentItem);
+        //}
+
         [HttpPost]
         [ActionName("Post03")]
         [EnableCors("MyPolicy")]
-        public async Task<IActionResult> Post03(ContentItem newContentItem, bool draft = false)
+        public async Task<IActionResult> Post03(UpdateInfluencerCostModel influencerCostModel, bool draft = false)
         {
-            var contentItem = await _contentManager.GetAsync(newContentItem.ContentItemId, VersionOptions.DraftRequired);
+            var contentItem = await _contentManager.GetAsync(influencerCostModel.ContentItemId, VersionOptions.DraftRequired);
 
             if (contentItem == null)
             {
@@ -287,19 +340,17 @@ namespace OrchardCore.Content.Controllers
                 }
             }
 
-            if (contentItem != newContentItem)
-            {
-                contentItem.DisplayText = newContentItem.DisplayText;
-                contentItem.ModifiedUtc = newContentItem.ModifiedUtc;
-                contentItem.PublishedUtc = newContentItem.PublishedUtc;
-                contentItem.CreatedUtc = newContentItem.CreatedUtc;
-                contentItem.Owner = newContentItem.Owner;
-                contentItem.Author = newContentItem.Author;
+            dynamic jsonObj = contentItem.Content;
+            jsonObj["Influencer"]["ShareLink"]["Text"] = influencerCostModel.ShareLinkCost;
+            jsonObj["Influencer"]["PostImage"]["Text"] = influencerCostModel.PostImageCost;
+            jsonObj["Influencer"]["Video"]["Text"] = influencerCostModel.VideoCost;
+            jsonObj["Influencer"]["CheckIn"]["Text"] = influencerCostModel.CheckinCost;
+            jsonObj["Influencer"]["LiveStream"]["Text"] = influencerCostModel.LiveStreamCost;
 
-                contentItem.Apply(newContentItem);
+            contentItem.ModifiedUtc = DateTime.Now;
 
-                await _contentManager.UpdateAsync(contentItem);
-            }
+            await _contentManager.UpdateAsync(contentItem);
+
 
             if (!ModelState.IsValid)
             {
