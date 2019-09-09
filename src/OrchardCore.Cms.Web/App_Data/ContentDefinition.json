@@ -1,0 +1,2266 @@
+{
+  "Id": 0,
+  "ContentTypeDefinitionRecords": [
+    {
+      "Name": "Menu",
+      "DisplayName": "Menu",
+      "Settings": {
+        "Draftable": "True",
+        "Versionable": "True",
+        "Listable": "True"
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "TitlePart",
+          "Name": "TitlePart",
+          "Settings": {
+            "Position": "0"
+          }
+        },
+        {
+          "PartName": "AliasPart",
+          "Name": "AliasPart",
+          "Settings": {
+            "Position": "1",
+            "AliasPartSettings": {
+              "Pattern": "{{ ContentItem | display_text | slugify }}"
+            }
+          }
+        },
+        {
+          "PartName": "MenuPart",
+          "Name": "MenuPart",
+          "Settings": {
+            "Position": "2"
+          }
+        },
+        {
+          "PartName": "MenuItemsListPart",
+          "Name": "MenuItemsListPart",
+          "Settings": {
+            "Position": "3"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "LinkMenuItem",
+      "DisplayName": "Link Menu Item",
+      "Settings": {
+        "Stereotype": "MenuItem"
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "LinkMenuItemPart",
+          "Name": "LinkMenuItemPart",
+          "Settings": {
+            "Position": "0"
+          }
+        },
+        {
+          "PartName": "LinkMenuItem",
+          "Name": "LinkMenuItem",
+          "Settings": {
+            "Position": "1"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "LiquidPage",
+      "DisplayName": "Liquid Page",
+      "Settings": {
+        "Creatable": "True",
+        "Draftable": "True",
+        "Versionable": "True",
+        "Listable": "True",
+        "Securable": "False",
+        "Stereotype": null
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "LiquidPage",
+          "Name": "LiquidPage",
+          "Settings": {
+            "Position": "2"
+          }
+        },
+        {
+          "PartName": "AutoroutePart",
+          "Name": "AutoroutePart",
+          "Settings": {
+            "ContentIndexSettings": {
+              "Included": false,
+              "Stored": false,
+              "Analyzed": false,
+              "Sanitized": false,
+              "Tokenized": false,
+              "Template": null
+            },
+            "Pattern": "{{ ContentItem | display_text | slugify }}",
+            "AllowCustomPath": "True",
+            "ShowHomepageOption": "True",
+            "Position": "1"
+          }
+        },
+        {
+          "PartName": "LiquidPart",
+          "Name": "LiquidPart",
+          "Settings": {
+            "ContentIndexSettings": {
+              "Included": false,
+              "Stored": false,
+              "Analyzed": false,
+              "Sanitized": false,
+              "Tokenized": false,
+              "Template": null
+            },
+            "Position": "3"
+          }
+        },
+        {
+          "PartName": "TitlePart",
+          "Name": "TitlePart",
+          "Settings": {
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "HtmlWidget",
+      "DisplayName": "Html",
+      "Settings": {
+        "Creatable": "False",
+        "Draftable": "True",
+        "Versionable": "True",
+        "Listable": "False",
+        "Securable": "True",
+        "Stereotype": "Widget"
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "HtmlWidget",
+          "Name": "HtmlWidget",
+          "Settings": {
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Page",
+      "DisplayName": "Page",
+      "Settings": {
+        "Creatable": "True",
+        "Draftable": "True",
+        "Versionable": "True",
+        "Listable": "True",
+        "Securable": "True",
+        "Stereotype": null
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "Page",
+          "Name": "Page",
+          "Settings": {
+            "Position": "3"
+          }
+        },
+        {
+          "PartName": "AutoroutePart",
+          "Name": "AutoroutePart",
+          "Settings": {
+            "Position": "1",
+            "ContentIndexSettings": {
+              "Included": false,
+              "Stored": false,
+              "Analyzed": false,
+              "Sanitized": false,
+              "Tokenized": false,
+              "Template": null
+            },
+            "Pattern": "{{ ContentItem | display_text | slugify }}",
+            "AllowCustomPath": "True",
+            "ShowHomepageOption": "True"
+          }
+        },
+        {
+          "PartName": "FlowPart",
+          "Name": "FlowPart",
+          "Settings": {
+            "Position": "2"
+          }
+        },
+        {
+          "PartName": "TitlePart",
+          "Name": "TitlePart",
+          "Settings": {
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "LandingPage",
+      "DisplayName": "Landing Page",
+      "Settings": {
+        "Creatable": "True",
+        "Draftable": "True",
+        "Versionable": "True",
+        "Listable": "True",
+        "Securable": "True",
+        "Stereotype": null
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "LandingPage",
+          "Name": "LandingPage",
+          "Settings": {
+            "Position": "8"
+          }
+        },
+        {
+          "PartName": "AutoroutePart",
+          "Name": "AutoroutePart",
+          "Settings": {
+            "Pattern": "{{ ContentItem | display_text | slugify }}",
+            "AllowCustomPath": "True",
+            "ShowHomepageOption": "True",
+            "ContentIndexSettings": {
+              "Included": false,
+              "Stored": false,
+              "Analyzed": false,
+              "Sanitized": false,
+              "Tokenized": false,
+              "Template": null
+            },
+            "Position": "1"
+          }
+        },
+        {
+          "PartName": "TitlePart",
+          "Name": "TitlePart",
+          "Settings": {
+            "Position": "0"
+          }
+        },
+        {
+          "PartName": "BagPart",
+          "Name": "Services",
+          "Settings": {
+            "DisplayName": "Services",
+            "Description": "Provides a collection behavior for your content item.",
+            "Position": "2",
+            "ContainedContentTypes": [
+              "Service"
+            ],
+            "ContentIndexSettings": {
+              "Included": false,
+              "Stored": false,
+              "Analyzed": false,
+              "Sanitized": false,
+              "Tokenized": false,
+              "Template": null
+            }
+          }
+        },
+        {
+          "PartName": "BagPart",
+          "Name": "Portfolio",
+          "Settings": {
+            "DisplayName": "Portfolio",
+            "Description": "Provides a collection behavior for your content item.",
+            "ContainedContentTypes": [
+              "Project"
+            ],
+            "ContentIndexSettings": {
+              "Included": false,
+              "Stored": false,
+              "Analyzed": false,
+              "Sanitized": false,
+              "Tokenized": false,
+              "Template": null
+            },
+            "Position": "3"
+          }
+        },
+        {
+          "PartName": "BagPart",
+          "Name": "About",
+          "Settings": {
+            "DisplayName": "About",
+            "Description": "A collection of milestones",
+            "Position": "4",
+            "ContainedContentTypes": [
+              "Milestone"
+            ],
+            "ContentIndexSettings": {
+              "Included": false,
+              "Stored": false,
+              "Analyzed": false,
+              "Sanitized": false,
+              "Tokenized": false,
+              "Template": null
+            }
+          }
+        },
+        {
+          "PartName": "BagPart",
+          "Name": "Team",
+          "Settings": {
+            "DisplayName": "Team",
+            "Description": "Team members",
+            "Position": "6",
+            "ContainedContentTypes": [
+              "TeamMember"
+            ],
+            "ContentIndexSettings": {
+              "Included": false,
+              "Stored": false,
+              "Analyzed": false,
+              "Sanitized": false,
+              "Tokenized": false,
+              "Template": null
+            }
+          }
+        },
+        {
+          "PartName": "BagPart",
+          "Name": "Clients",
+          "Settings": {
+            "DisplayName": "Clients",
+            "Description": "Provides a collection behavior for your content item.",
+            "Position": "7",
+            "ContainedContentTypes": [
+              "Client"
+            ],
+            "ContentIndexSettings": {
+              "Included": false,
+              "Stored": false,
+              "Analyzed": false,
+              "Sanitized": false,
+              "Tokenized": false,
+              "Template": null
+            }
+          }
+        },
+        {
+          "PartName": "BagPart",
+          "Name": "ratings",
+          "Settings": {
+            "DisplayName": "ratings",
+            "Description": "list of rating",
+            "Editor": null,
+            "GraphQLContentTypePartSettings": {},
+            "ContainedContentTypes": [
+              "rating"
+            ],
+            "DisplayType": null,
+            "Position": "5"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Project",
+      "DisplayName": "Project",
+      "Settings": {},
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "Project",
+          "Name": "Project",
+          "Settings": {
+            "Position": "2"
+          }
+        },
+        {
+          "PartName": "HtmlBodyPart",
+          "Name": "HtmlBodyPart",
+          "Settings": {
+            "Position": "1"
+          }
+        },
+        {
+          "PartName": "TitlePart",
+          "Name": "TitlePart",
+          "Settings": {
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Milestone",
+      "DisplayName": "Milestone",
+      "Settings": {},
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "Milestone",
+          "Name": "Milestone",
+          "Settings": {
+            "Position": "0"
+          }
+        },
+        {
+          "PartName": "HtmlBodyPart",
+          "Name": "HtmlBodyPart",
+          "Settings": {
+            "Position": "2"
+          }
+        },
+        {
+          "PartName": "TitlePart",
+          "Name": "TitlePart",
+          "Settings": {
+            "Position": "1"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Client",
+      "DisplayName": "Client",
+      "Settings": {
+        "Creatable": "False",
+        "Draftable": "False",
+        "Versionable": "False",
+        "Listable": "False",
+        "Securable": "False",
+        "Stereotype": null
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "Client",
+          "Name": "Client",
+          "Settings": {
+            "Position": "1"
+          }
+        },
+        {
+          "PartName": "TitlePart",
+          "Name": "TitlePart",
+          "Settings": {
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Container",
+      "DisplayName": "Container",
+      "Settings": {
+        "Creatable": "False",
+        "Draftable": "True",
+        "Versionable": "True",
+        "Listable": "False",
+        "Securable": "True",
+        "Stereotype": "Widget"
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "Container",
+          "Name": "Container",
+          "Settings": {
+            "Position": "0"
+          }
+        },
+        {
+          "PartName": "FlowPart",
+          "Name": "FlowPart",
+          "Settings": {
+            "Position": "1"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Blockquote",
+      "DisplayName": "Blockquote",
+      "Settings": {
+        "Creatable": "False",
+        "Draftable": "True",
+        "Versionable": "True",
+        "Listable": "False",
+        "Securable": "True",
+        "Stereotype": "Widget"
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "Blockquote",
+          "Name": "Blockquote",
+          "Settings": {
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "ImageWidget",
+      "DisplayName": "Image",
+      "Settings": {
+        "Creatable": "False",
+        "Draftable": "True",
+        "Versionable": "True",
+        "Listable": "False",
+        "Securable": "True",
+        "Stereotype": "Widget"
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "Image",
+          "Name": "Image",
+          "Settings": {
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "LiquidWidget",
+      "DisplayName": "Liquid",
+      "Settings": {
+        "Creatable": "False",
+        "Draftable": "True",
+        "Versionable": "True",
+        "Listable": "True",
+        "Securable": "True",
+        "Stereotype": "Widget"
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "LiquidPart",
+          "Name": "LiquidPart",
+          "Settings": {
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Image",
+      "DisplayName": "Image",
+      "Settings": {
+        "Creatable": "False",
+        "Draftable": "False",
+        "Versionable": "True",
+        "Listable": "False",
+        "Securable": "False",
+        "Stereotype": null
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "Image",
+          "Name": "Image",
+          "Settings": {
+            "Position": "0"
+          }
+        },
+        {
+          "PartName": "TitlePart",
+          "Name": "TitlePart",
+          "Settings": {
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Paragraph",
+      "DisplayName": "Paragraph",
+      "Settings": {
+        "Creatable": "False",
+        "Draftable": "True",
+        "Versionable": "True",
+        "Listable": "False",
+        "Securable": "True",
+        "Stereotype": "Widget"
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "Paragraph",
+          "Name": "Paragraph",
+          "Settings": {
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Campaign",
+      "DisplayName": "Campaign",
+      "Settings": {
+        "Creatable": "True",
+        "Draftable": "True",
+        "Versionable": "True",
+        "Listable": "True",
+        "Securable": "True",
+        "Stereotype": null
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "Campaign",
+          "Name": "Campaign",
+          "Settings": {
+            "Position": "1"
+          }
+        },
+        {
+          "PartName": "TitlePart",
+          "Name": "TitlePart",
+          "Settings": {
+            "Position": "0"
+          }
+        },
+        {
+          "PartName": "BagPart",
+          "Name": "BagPart",
+          "Settings": {
+            "DisplayName": "Bag",
+            "Description": "Provides a collection behavior for your content item.",
+            "Editor": null,
+            "GraphQLContentTypePartSettings": {},
+            "ContainedContentTypes": [
+              "Influencer"
+            ],
+            "DisplayType": null,
+            "Position": "2"
+          }
+        },
+        {
+          "PartName": "CheckIn",
+          "Name": "CheckIn",
+          "Settings": {
+            "Position": "3"
+          }
+        },
+        {
+          "PartName": "LiveStream",
+          "Name": "LiveStream",
+          "Settings": {
+            "Position": "4"
+          }
+        },
+        {
+          "PartName": "PostImage",
+          "Name": "PostImage",
+          "Settings": {
+            "Position": "5"
+          }
+        },
+        {
+          "PartName": "ShareLink",
+          "Name": "ShareLink",
+          "Settings": {
+            "Position": "6"
+          }
+        },
+        {
+          "PartName": "Video",
+          "Name": "Video",
+          "Settings": {
+            "Position": "7"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Campaigns",
+      "DisplayName": "Campaigns",
+      "Settings": {
+        "Creatable": "True",
+        "Draftable": "True",
+        "Versionable": "True",
+        "Listable": "True",
+        "Securable": "True",
+        "Stereotype": null
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "Campaigns",
+          "Name": "Campaigns",
+          "Settings": {
+            "Position": "1"
+          }
+        },
+        {
+          "PartName": "BagPart",
+          "Name": "BagPart",
+          "Settings": {
+            "DisplayName": "Bag",
+            "Description": "Provides a collection behavior for your content item.",
+            "Editor": null,
+            "GraphQLContentTypePartSettings": {},
+            "ContainedContentTypes": [
+              "Campaign"
+            ],
+            "DisplayType": null,
+            "Position": "2"
+          }
+        },
+        {
+          "PartName": "TitlePart",
+          "Name": "TitlePart",
+          "Settings": {
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "InterestingList",
+      "DisplayName": "Interesting List",
+      "Settings": {
+        "Creatable": "True",
+        "Draftable": "True",
+        "Versionable": "True",
+        "Listable": "True",
+        "Securable": "True",
+        "Stereotype": null
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "InterestingList",
+          "Name": "InterestingList",
+          "Settings": {
+            "Position": "1"
+          }
+        },
+        {
+          "PartName": "TitlePart",
+          "Name": "TitlePart",
+          "Settings": {
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Locations",
+      "DisplayName": "Locations",
+      "Settings": {
+        "Creatable": "True",
+        "Draftable": "True",
+        "Versionable": "True",
+        "Listable": "True",
+        "Securable": "True",
+        "Stereotype": null
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "Locations",
+          "Name": "Locations",
+          "Settings": {
+            "Position": "1"
+          }
+        },
+        {
+          "PartName": "TitlePart",
+          "Name": "TitlePart",
+          "Settings": {
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Brand",
+      "DisplayName": "Brand",
+      "Settings": {
+        "Creatable": "True",
+        "Draftable": "True",
+        "Versionable": "True",
+        "Listable": "True",
+        "Securable": "True",
+        "Stereotype": null
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "Brand",
+          "Name": "Brand",
+          "Settings": {
+            "Position": "1"
+          }
+        },
+        {
+          "PartName": "TitlePart",
+          "Name": "TitlePart",
+          "Settings": {
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Influencer",
+      "DisplayName": "Influencer",
+      "Settings": {
+        "Creatable": "True",
+        "Draftable": "True",
+        "Versionable": "True",
+        "Listable": "True",
+        "Securable": "True",
+        "Stereotype": null
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "Influencer",
+          "Name": "Influencer",
+          "Settings": {
+            "Position": "1"
+          }
+        },
+        {
+          "PartName": "TitlePart",
+          "Name": "TitlePart",
+          "Settings": {
+            "Position": "0"
+          }
+        },
+        {
+          "PartName": "AgeDemorgraphic",
+          "Name": "AgeDemorgraphic",
+          "Settings": {
+            "Position": "2"
+          }
+        },
+        {
+          "PartName": "GenderDemorgraphic",
+          "Name": "GenderDemorgraphic",
+          "Settings": {
+            "Position": "3"
+          }
+        },
+        {
+          "PartName": "GeoDemorgraphic",
+          "Name": "GeoDemorgraphic",
+          "Settings": {
+            "Position": "4"
+          }
+        },
+        {
+          "PartName": "Post",
+          "Name": "Post1",
+          "Settings": {
+            "DisplayName": "Post1",
+            "Description": null,
+            "Position": "5"
+          }
+        },
+        {
+          "PartName": "Post",
+          "Name": "Post2",
+          "Settings": {
+            "DisplayName": "Post2",
+            "Description": null,
+            "Position": "6"
+          }
+        },
+        {
+          "PartName": "Post",
+          "Name": "Post3",
+          "Settings": {
+            "DisplayName": "Post3",
+            "Description": null,
+            "Position": "7"
+          }
+        },
+        {
+          "PartName": "Post",
+          "Name": "Post4",
+          "Settings": {
+            "DisplayName": "Post4",
+            "Description": null,
+            "Position": "8"
+          }
+        },
+        {
+          "PartName": "Post",
+          "Name": "Post5",
+          "Settings": {
+            "DisplayName": "Post5",
+            "Description": null,
+            "Position": "9"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "LocationDemorgraphic",
+      "DisplayName": "LocationDemorgraphic",
+      "Settings": {
+        "Creatable": "False",
+        "Draftable": "False",
+        "Versionable": "False",
+        "Listable": "False",
+        "Securable": "False",
+        "Stereotype": null
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "LocationDemorgraphic",
+          "Name": "LocationDemorgraphic",
+          "Settings": {
+            "Position": "1"
+          }
+        },
+        {
+          "PartName": "TitlePart",
+          "Name": "TitlePart",
+          "Settings": {
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Rates",
+      "DisplayName": "Rates",
+      "Settings": {
+        "Creatable": "False",
+        "Draftable": "False",
+        "Versionable": "False",
+        "Listable": "False",
+        "Securable": "False",
+        "Stereotype": null
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "Rates",
+          "Name": "Rates",
+          "Settings": {
+            "Position": "1"
+          }
+        },
+        {
+          "PartName": "TitlePart",
+          "Name": "TitlePart",
+          "Settings": {
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Networks",
+      "DisplayName": "Networks",
+      "Settings": {
+        "Creatable": "True",
+        "Draftable": "True",
+        "Versionable": "True",
+        "Listable": "True",
+        "Securable": "True",
+        "Stereotype": null
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "Networks",
+          "Name": "Networks",
+          "Settings": {
+            "Position": "1"
+          }
+        },
+        {
+          "PartName": "TitlePart",
+          "Name": "TitlePart",
+          "Settings": {
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Jobs",
+      "DisplayName": "Jobs",
+      "Settings": {
+        "Creatable": "True",
+        "Draftable": "True",
+        "Versionable": "True",
+        "Listable": "True",
+        "Securable": "True",
+        "Stereotype": null
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "Jobs",
+          "Name": "Jobs",
+          "Settings": {
+            "Position": "1"
+          }
+        },
+        {
+          "PartName": "TitlePart",
+          "Name": "TitlePart",
+          "Settings": {
+            "Position": "0"
+          }
+        },
+        {
+          "PartName": "BagPart",
+          "Name": "BagPart",
+          "Settings": {
+            "DisplayName": "Bag",
+            "Description": "Provides a collection behavior for your content item.",
+            "Editor": null,
+            "GraphQLContentTypePartSettings": {},
+            "ContainedContentTypes": [
+              "JobCategory"
+            ],
+            "DisplayType": null,
+            "Position": "2"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "JobCategory",
+      "DisplayName": "JobCategory",
+      "Settings": {
+        "Creatable": "True",
+        "Draftable": "True",
+        "Versionable": "True",
+        "Listable": "True",
+        "Securable": "True",
+        "Stereotype": null
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "JobCategory",
+          "Name": "JobCategory",
+          "Settings": {
+            "Position": "1"
+          }
+        },
+        {
+          "PartName": "TitlePart",
+          "Name": "TitlePart",
+          "Settings": {
+            "Position": "0"
+          }
+        }
+      ]
+    }
+  ],
+  "ContentPartDefinitionRecords": [
+    {
+      "Name": "CommonPart",
+      "Settings": {
+        "Attachable": "True",
+        "Description": "Provides an editor for the common properties of a content item."
+      },
+      "ContentPartFieldDefinitionRecords": []
+    },
+    {
+      "Name": "LiquidPart",
+      "Settings": {
+        "Attachable": "True",
+        "Description": "Provides a Liquid formatted body for your content item."
+      },
+      "ContentPartFieldDefinitionRecords": []
+    },
+    {
+      "Name": "AliasPart",
+      "Settings": {
+        "Attachable": "True",
+        "Description": "Provides a way to define custom aliases for content items."
+      },
+      "ContentPartFieldDefinitionRecords": []
+    },
+    {
+      "Name": "AutoroutePart",
+      "Settings": {
+        "Attachable": "True",
+        "Description": "Provides a custom url for your content item."
+      },
+      "ContentPartFieldDefinitionRecords": []
+    },
+    {
+      "Name": "WidgetsListPart",
+      "Settings": {
+        "Attachable": "True",
+        "Description": "Provides a way to add widgets per content items."
+      },
+      "ContentPartFieldDefinitionRecords": []
+    },
+    {
+      "Name": "FlowPart",
+      "Settings": {
+        "Attachable": "True",
+        "Description": "Provides a customizable body for your content item."
+      },
+      "ContentPartFieldDefinitionRecords": []
+    },
+    {
+      "Name": "BagPart",
+      "Settings": {
+        "Attachable": "True",
+        "Reusable": "True",
+        "Description": "Provides a collection behavior for your content item."
+      },
+      "ContentPartFieldDefinitionRecords": []
+    },
+    {
+      "Name": "HtmlBodyPart",
+      "Settings": {
+        "Attachable": "True",
+        "Description": "Provides an HTML Body for your content item."
+      },
+      "ContentPartFieldDefinitionRecords": []
+    },
+    {
+      "Name": "ListPart",
+      "Settings": {
+        "Attachable": "True",
+        "Description": "Add a list behavior."
+      },
+      "ContentPartFieldDefinitionRecords": []
+    },
+    {
+      "Name": "MarkdownBodyPart",
+      "Settings": {
+        "Attachable": "True",
+        "Description": "Provides a Markdown formatted body for your content item."
+      },
+      "ContentPartFieldDefinitionRecords": []
+    },
+    {
+      "Name": "TitlePart",
+      "Settings": {
+        "Attachable": "True",
+        "Description": "Provides a Title for your content item.",
+        "DefaultPosition": "0"
+      },
+      "ContentPartFieldDefinitionRecords": []
+    },
+    {
+      "Name": "MenuPart",
+      "Settings": {},
+      "ContentPartFieldDefinitionRecords": []
+    },
+    {
+      "Name": "MenuItemPart",
+      "Settings": {},
+      "ContentPartFieldDefinitionRecords": []
+    },
+    {
+      "Name": "LinkMenuItemPart",
+      "Settings": {
+        "Attachable": true,
+        "Description": "Provides a menu link behavior for your content item."
+      },
+      "ContentPartFieldDefinitionRecords": []
+    },
+    {
+      "Name": "HtmlWidget",
+      "Settings": {},
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "HtmlField",
+          "Name": "Content",
+          "Settings": {
+            "DisplayName": "Content",
+            "ContentIndexSettings": {
+              "Included": false,
+              "Stored": false,
+              "Analyzed": false,
+              "Sanitized": false,
+              "Tokenized": false
+            },
+            "Hint": null,
+            "Editor": "Multiline",
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "MenuItem",
+      "Settings": {},
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "TextField",
+          "Name": "Link",
+          "Settings": {
+            "DisplayName": "Link",
+            "Hint": null,
+            "Editor": null,
+            "ContentIndexSettings": {
+              "Included": false,
+              "Stored": false,
+              "Analyzed": false,
+              "Sanitized": false,
+              "Tokenized": false,
+              "Template": null
+            },
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Project",
+      "Settings": {},
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "MediaField",
+          "Name": "Image",
+          "Settings": {
+            "DisplayName": "Image",
+            "ContentIndexSettings": {
+              "Included": false,
+              "Stored": false,
+              "Analyzed": false,
+              "Sanitized": false,
+              "Tokenized": false,
+              "Template": null
+            },
+            "Hint": null,
+            "Required": true,
+            "Multiple": false,
+            "Position": "1"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Category",
+          "Settings": {
+            "DisplayName": "Category",
+            "Hint": "The category that is displayed below the title",
+            "Editor": null,
+            "ContentIndexSettings": {
+              "Included": false,
+              "Stored": false,
+              "Analyzed": false,
+              "Sanitized": false,
+              "Tokenized": false,
+              "Template": null
+            },
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Milestone",
+      "Settings": {},
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "TextField",
+          "Name": "Date",
+          "Settings": {
+            "DisplayName": "Date",
+            "Hint": null,
+            "Editor": null,
+            "ContentIndexSettings": {
+              "Included": false,
+              "Stored": false,
+              "Analyzed": false,
+              "Sanitized": false,
+              "Tokenized": false,
+              "Template": null
+            },
+            "Position": "0"
+          }
+        },
+        {
+          "FieldName": "MediaField",
+          "Name": "Image",
+          "Settings": {
+            "DisplayName": "Image",
+            "ContentIndexSettings": {
+              "Included": false,
+              "Stored": false,
+              "Analyzed": false,
+              "Sanitized": false,
+              "Tokenized": false,
+              "Template": null
+            },
+            "Hint": null,
+            "Required": true,
+            "Multiple": false,
+            "Position": "1"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Client",
+      "Settings": {},
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "MediaField",
+          "Name": "Logo",
+          "Settings": {
+            "DisplayName": "Logo",
+            "ContentIndexSettings": {
+              "Included": false,
+              "Stored": false,
+              "Analyzed": false,
+              "Sanitized": false,
+              "Tokenized": false,
+              "Template": null
+            },
+            "Hint": null,
+            "Required": true,
+            "Multiple": false,
+            "Position": "0"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Url",
+          "Settings": {
+            "DisplayName": "Url",
+            "Hint": null,
+            "Editor": null,
+            "ContentIndexSettings": {
+              "Included": false,
+              "Stored": false,
+              "Analyzed": false,
+              "Sanitized": false,
+              "Tokenized": false,
+              "Template": null
+            },
+            "Position": "1"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Blockquote",
+      "Settings": {},
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "TextField",
+          "Name": "Quote",
+          "Settings": {
+            "DisplayName": "Quote",
+            "ContentIndexSettings": {
+              "Included": false,
+              "Stored": false,
+              "Analyzed": false,
+              "Sanitized": false,
+              "Tokenized": false
+            },
+            "Hint": null,
+            "Editor": "TextArea",
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Image",
+      "Settings": {
+        "Attachable": true
+      },
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "MediaField",
+          "Name": "Media",
+          "Settings": {
+            "DisplayName": "Image",
+            "ContentIndexSettings": {
+              "Included": false,
+              "Stored": false,
+              "Analyzed": false,
+              "Sanitized": false,
+              "Tokenized": false
+            },
+            "Hint": null,
+            "Editor": null,
+            "Position": "0",
+            "Multiple": false,
+            "Required": true
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Caption",
+          "Settings": {
+            "DisplayName": "Caption",
+            "ContentIndexSettings": {
+              "Included": false,
+              "Stored": false,
+              "Analyzed": false,
+              "Sanitized": false,
+              "Tokenized": false,
+              "Template": null
+            },
+            "Hint": "A description of the image used as title or alternate text",
+            "Editor": null,
+            "Position": "1"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Paragraph",
+      "Settings": {},
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "HtmlField",
+          "Name": "Content",
+          "Settings": {
+            "DisplayName": "Content",
+            "ContentIndexSettings": {
+              "Included": false,
+              "Stored": false,
+              "Analyzed": false,
+              "Sanitized": false,
+              "Tokenized": false
+            },
+            "Hint": null,
+            "Editor": "Wysiwyg",
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Campaign",
+      "Settings": {},
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "TextField",
+          "Name": "CampaignTarget",
+          "Settings": {
+            "DisplayName": "Campaign Target",
+            "Position": "0"
+          }
+        },
+        {
+          "FieldName": "DateField",
+          "Name": "FromDate",
+          "Settings": {
+            "DisplayName": "Campaign From",
+            "Position": "11"
+          }
+        },
+        {
+          "FieldName": "DateField",
+          "Name": "ToDate",
+          "Settings": {
+            "DisplayName": "Campaign To",
+            "Position": "12"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "ProductInfo",
+          "Settings": {
+            "DisplayName": "Product Info",
+            "Position": "13"
+          }
+        },
+        {
+          "FieldName": "NumericField",
+          "Name": "Budget",
+          "Settings": {
+            "DisplayName": "Budget",
+            "Position": "14"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Currency",
+          "Settings": {
+            "DisplayName": "Currency",
+            "Position": "15"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "CampaignName",
+          "Settings": {
+            "DisplayName": "Campaign Name",
+            "Position": "10"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "MarketPlace",
+          "Settings": {
+            "DisplayName": "MarketPlace",
+            "Position": "6"
+          }
+        },
+        {
+          "FieldName": "NumericField",
+          "Name": "FromAge",
+          "Settings": {
+            "DisplayName": "FromAge",
+            "Position": "7"
+          }
+        },
+        {
+          "FieldName": "NumericField",
+          "Name": "ToAge",
+          "Settings": {
+            "DisplayName": "ToAge",
+            "Position": "8"
+          }
+        },
+        {
+          "FieldName": "NumericField",
+          "Name": "Gender",
+          "Settings": {
+            "DisplayName": "Gender",
+            "Position": "9"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "HashTag",
+          "Settings": {
+            "DisplayName": "HashTag",
+            "Position": "2"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Keyword",
+          "Settings": {
+            "DisplayName": "Keyword",
+            "Position": "3"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Link",
+          "Settings": {
+            "DisplayName": "Link",
+            "Position": "4"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Description",
+          "Settings": {
+            "DisplayName": "Description",
+            "Position": "5"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Interesting",
+          "Settings": {
+            "DisplayName": "Interesting",
+            "Position": "1"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "JobName",
+          "Settings": {
+            "DisplayName": "JobName"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "InterestingList",
+      "Settings": {},
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "TextField",
+          "Name": "Interesting",
+          "Settings": {
+            "DisplayName": "Interesting",
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Locations",
+      "Settings": {},
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "TextField",
+          "Name": "Location",
+          "Settings": {
+            "DisplayName": "Location",
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "LocationDemorgraphic",
+      "Settings": {},
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "TextField",
+          "Name": "Percentage",
+          "Settings": {
+            "DisplayName": "Percentage",
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Rates",
+      "Settings": {},
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "MediaField",
+          "Name": "Icon",
+          "Settings": {
+            "DisplayName": "Icon",
+            "Position": "1"
+          }
+        },
+        {
+          "FieldName": "NumericField",
+          "Name": "Price",
+          "Settings": {
+            "DisplayName": "Price",
+            "Position": "0",
+            "Hint": null,
+            "Required": false,
+            "Scale": 0,
+            "Minimum": null,
+            "Maximum": null,
+            "Placeholder": null,
+            "DefaultValue": "500000",
+            "Editor": null,
+            "DisplayMode": null
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Influencer",
+      "Settings": {},
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "TextField",
+          "Name": "Description",
+          "Settings": {
+            "DisplayName": "Description",
+            "Position": "0"
+          }
+        },
+        {
+          "FieldName": "MediaField",
+          "Name": "Photo",
+          "Settings": {
+            "DisplayName": "Photo",
+            "Position": "15"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Fanpage",
+          "Settings": {
+            "DisplayName": "Fanpage",
+            "Hint": null,
+            "Required": false,
+            "Editor": "Url",
+            "DisplayMode": null,
+            "Position": "13"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Email",
+          "Settings": {
+            "DisplayName": "Email",
+            "Position": "14"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "FullName",
+          "Settings": {
+            "DisplayName": "Full Name",
+            "Position": "12"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "ShareLink",
+          "Settings": {
+            "DisplayName": "Share Link",
+            "Position": "7"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "PostImage",
+          "Settings": {
+            "DisplayName": "Post Image",
+            "Position": "8"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "LiveStream",
+          "Settings": {
+            "DisplayName": "Live Stream",
+            "Position": "9"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "CheckIn",
+          "Settings": {
+            "DisplayName": "Check In",
+            "Position": "10"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Video",
+          "Settings": {
+            "DisplayName": "Video",
+            "Position": "11"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Phone",
+          "Settings": {
+            "DisplayName": "Phone",
+            "Position": "6"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "NumberOfComment",
+          "Settings": {
+            "DisplayName": "NumberOfComment",
+            "Position": "5"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "NumberOfShare",
+          "Settings": {
+            "DisplayName": "NumberOfShare",
+            "Position": "3"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "NumberOfReaction",
+          "Settings": {
+            "DisplayName": "NumberOfReaction",
+            "Position": "4"
+          }
+        },
+        {
+          "FieldName": "MediaField",
+          "Name": "VideoLink",
+          "Settings": {
+            "DisplayName": "VideoLink",
+            "Position": "2"
+          }
+        },
+        {
+          "FieldName": "NumericField",
+          "Name": "NumberOfPost",
+          "Settings": {
+            "DisplayName": "NumberOfPost",
+            "Position": "1"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Networks",
+      "Settings": {},
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "MediaField",
+          "Name": "Icon",
+          "Settings": {
+            "DisplayName": "Icon",
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Jobs",
+      "Settings": {},
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "TextField",
+          "Name": "Name",
+          "Settings": {
+            "DisplayName": "Name",
+            "Position": "0"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "HashTag",
+          "Settings": {
+            "DisplayName": "HashTag",
+            "Position": "1"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Keyword",
+          "Settings": {
+            "DisplayName": "Keyword",
+            "Position": "2"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Link",
+          "Settings": {
+            "DisplayName": "Link",
+            "Position": "3"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Description",
+          "Settings": {
+            "DisplayName": "Description",
+            "Position": "4"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "JobCategory",
+      "Settings": {},
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "MediaField",
+          "Name": "icon",
+          "Settings": {
+            "DisplayName": "icon",
+            "Position": "0"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Description",
+          "Settings": {
+            "DisplayName": "Description",
+            "Position": "1"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Brand",
+      "Settings": {},
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "TextField",
+          "Name": "FullName",
+          "Settings": {
+            "DisplayName": "FullName",
+            "Position": "0"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Email",
+          "Settings": {
+            "DisplayName": "Email",
+            "Position": "2"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "BrandName",
+          "Settings": {
+            "DisplayName": "BrandName",
+            "Position": "3"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "BusinessAreas",
+          "Settings": {
+            "DisplayName": "BusinessAreas",
+            "Position": "4"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Phone",
+          "Settings": {
+            "DisplayName": "Phone",
+            "Position": "5"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Password",
+          "Settings": {
+            "DisplayName": "Password",
+            "Position": "6"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Location",
+          "Settings": {
+            "DisplayName": "Location",
+            "Position": "7"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "ReferenceCode",
+          "Settings": {
+            "DisplayName": "ReferenceCode",
+            "Position": "8"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "ExpiredIn",
+          "Settings": {
+            "DisplayName": "ExpiredIn",
+            "Position": "1"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Campaigns",
+      "Settings": {},
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "TextField",
+          "Name": "FullName",
+          "Settings": {
+            "DisplayName": "FullName",
+            "Position": "0"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Email",
+          "Settings": {
+            "DisplayName": "Email",
+            "Position": "1"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "BrandName",
+          "Settings": {
+            "DisplayName": "BrandName",
+            "Position": "2"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "BusinessAreas",
+          "Settings": {
+            "DisplayName": "BusinessAreas",
+            "Position": "3"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Phone",
+          "Settings": {
+            "DisplayName": "Phone",
+            "Position": "4"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Location",
+          "Settings": {
+            "DisplayName": "Location",
+            "Position": "5"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "AgeDemorgraphic",
+      "Settings": {
+        "Attachable": "True",
+        "Reusable": "False",
+        "Description": "AgeDemorgraphic for Influencers",
+        "DisplayName": null
+      },
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "TextField",
+          "Name": "AgeGraphicsName",
+          "Settings": {
+            "DisplayName": "AgeGraphicsName",
+            "Position": "1"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "AgePercentage",
+          "Settings": {
+            "DisplayName": "AgePercentage",
+            "Position": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "GenderDemorgraphic",
+      "Settings": {
+        "Attachable": "True",
+        "Reusable": "False",
+        "Description": "GenderDemorgraphic for Influencers",
+        "DisplayName": null
+      },
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "TextField",
+          "Name": "GenderPercentage",
+          "Settings": {
+            "DisplayName": "GenderPercentage",
+            "Position": "0"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "GenderGraphicName",
+          "Settings": {
+            "DisplayName": "GenderGraphicName",
+            "Position": "1"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "GeoDemorgraphic",
+      "Settings": {
+        "Attachable": "True",
+        "Reusable": "False",
+        "Description": "GeoDemorgraphic for Influencers",
+        "DisplayName": null
+      },
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "TextField",
+          "Name": "GeoPercentage",
+          "Settings": {
+            "DisplayName": "GeoPercentage",
+            "Position": "0"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "GeoGraphicName",
+          "Settings": {
+            "DisplayName": "GeoGraphicName",
+            "Position": "1"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "ShareLink",
+      "Settings": {
+        "Attachable": "True",
+        "Reusable": "False",
+        "Description": "Cost of share link",
+        "DisplayName": null
+      },
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "TextField",
+          "Name": "Cost",
+          "Settings": {
+            "DisplayName": "Cost of share link",
+            "Position": "0",
+            "Hint": null,
+            "Required": false,
+            "Editor": null,
+            "DisplayMode": null
+          }
+        }
+      ]
+    },
+    {
+      "Name": "PostImage",
+      "Settings": {
+        "Attachable": "True",
+        "Reusable": "False",
+        "Description": "Cost of post image",
+        "DisplayName": null
+      },
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "TextField",
+          "Name": "Cost",
+          "Settings": {
+            "DisplayName": "Cost of post image",
+            "Position": "0",
+            "Hint": null,
+            "Required": false,
+            "Editor": null,
+            "DisplayMode": null
+          }
+        }
+      ]
+    },
+    {
+      "Name": "LiveStream",
+      "Settings": {
+        "Attachable": "True",
+        "Reusable": "False",
+        "Description": "Cost of live stream",
+        "DisplayName": null
+      },
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "TextField",
+          "Name": "Cost",
+          "Settings": {
+            "DisplayName": "Cost of live stream",
+            "Position": "0",
+            "Hint": null,
+            "Required": false,
+            "Editor": null,
+            "DisplayMode": null
+          }
+        }
+      ]
+    },
+    {
+      "Name": "CheckIn",
+      "Settings": {
+        "Attachable": "True",
+        "Reusable": "False",
+        "Description": "Cost of check in",
+        "DisplayName": null
+      },
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "TextField",
+          "Name": "Cost",
+          "Settings": {
+            "DisplayName": "Cost of check in",
+            "Position": "0",
+            "Hint": null,
+            "Required": false,
+            "Editor": null,
+            "DisplayMode": null
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Video",
+      "Settings": {
+        "Attachable": "True",
+        "Reusable": "False",
+        "Description": "Cost of video",
+        "DisplayName": null
+      },
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "TextField",
+          "Name": "Cost",
+          "Settings": {
+            "DisplayName": "Cost of video",
+            "Position": "0",
+            "Hint": null,
+            "Required": false,
+            "Editor": null,
+            "DisplayMode": null
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Healthy",
+      "Settings": {
+        "Attachable": "True"
+      },
+      "ContentPartFieldDefinitionRecords": []
+    },
+    {
+      "Name": "Post",
+      "Settings": {
+        "Attachable": "True",
+        "Reusable": "True",
+        "Description": "Post of Influencer",
+        "DisplayName": null
+      },
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "TextField",
+          "Name": "Time",
+          "Settings": {
+            "DisplayName": "Time",
+            "Position": "0"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Type",
+          "Settings": {
+            "DisplayName": "Type",
+            "Position": "1"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Title",
+          "Settings": {
+            "DisplayName": "Title",
+            "Position": "2"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Status",
+          "Settings": {
+            "DisplayName": "Status",
+            "Position": "3"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "NumberOfComment",
+          "Settings": {
+            "DisplayName": "NumberOfComment",
+            "Position": "4"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "NumberOfShare",
+          "Settings": {
+            "DisplayName": "NumberOfShare",
+            "Position": "5"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "NumberOfReaction",
+          "Settings": {
+            "DisplayName": "NumberOfReaction",
+            "Position": "6"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Link",
+          "Settings": {
+            "DisplayName": "Link",
+            "Position": "7"
+          }
+        }
+      ]
+    }
+  ],
+  "Serial": 1155
+}
