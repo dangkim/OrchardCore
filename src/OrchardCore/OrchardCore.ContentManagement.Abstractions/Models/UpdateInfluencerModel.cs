@@ -21,6 +21,12 @@ namespace OrchardCore.ContentManagement.Models
         public int NumberOfFollowers { get; set; }
     }
 
+    public class UpdateVideoModel
+    {
+        public string ContentItemId { get; set; }
+        public List<string> VideoPaths { get; set; }
+    }
+
     public class UpdatePostModel
     {
         public string ContentItemId { get; set; }

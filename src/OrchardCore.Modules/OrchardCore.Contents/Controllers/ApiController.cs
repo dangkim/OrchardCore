@@ -481,6 +481,53 @@ namespace OrchardCore.Content.Controllers
             return Ok(contentItem);
         }
 
+        [HttpPost]
+        [ActionName("UpdateVideos")]
+        [EnableCors("MyPolicy")]
+        public async Task<IActionResult> UpdateVideos(UpdateVideoModel videoModel, bool draft = false)
+        {
+            var contentItem = await _contentManager.GetAsync(videoModel.ContentItemId, VersionOptions.DraftRequired);
+
+            if (contentItem == null)
+            {
+                return StatusCode(204);
+            }
+            else
+            {
+                if (!await _authorizationService.AuthorizeAsync(User, Permissions.EditOwnContent, contentItem))
+                {
+                    return Unauthorized();
+                }
+            }
+
+            dynamic jsonObj = contentItem.Content;
+
+            var videoLinks = jsonObj["Influencer"]["VideoLink"]["Paths"];
+
+            foreach (var item in videoModel.VideoPaths)
+            {
+                videoLinks.Add(item);
+            }
+
+            contentItem.ModifiedUtc = DateTime.Now;
+
+            await _contentManager.UpdateAsync(contentItem);
+
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!draft)
+            {
+                await _contentManager.PublishAsync(contentItem);
+            }
+
+            return Ok(contentItem);
+        }
+
+
         [HttpGet]
         [ActionName("Post04")]
         [EnableCors("MyPolicy")]
