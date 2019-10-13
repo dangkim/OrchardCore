@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Models;
 using OrchardCore.Contents;
@@ -324,7 +325,7 @@ namespace OrchardCore.Content.Controllers
         [HttpPost]
         [ActionName("Post03")]
         [EnableCors("MyPolicy")]
-        public async Task<IActionResult> Post03(UpdateInfluencerCostModel influencerCostModel, bool draft = false)
+        public async Task<IActionResult> Post03(UpdateInfluencerModel influencerCostModel, bool draft = false)
         {
             var contentItem = await _contentManager.GetAsync(influencerCostModel.ContentItemId, VersionOptions.DraftRequired);
 
@@ -347,6 +348,121 @@ namespace OrchardCore.Content.Controllers
             jsonObj["Influencer"]["CheckIn"]["Text"] = influencerCostModel.CheckinCost;
             jsonObj["Influencer"]["LiveStream"]["Text"] = influencerCostModel.LiveStreamCost;
 
+            contentItem.ModifiedUtc = DateTime.Now;
+
+            await _contentManager.UpdateAsync(contentItem);
+
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!draft)
+            {
+                await _contentManager.PublishAsync(contentItem);
+            }
+
+            return Ok(contentItem);
+        }
+
+        [HttpPost]
+        [ActionName("UpdateFollowerAndPhoto")]
+        [EnableCors("MyPolicy")]
+        public async Task<IActionResult> UpdateFollowerAndPhoto(UpdateFollowerAndPhotoModel followerAndPhotoModel, bool draft = false)
+        {
+            var contentItem = await _contentManager.GetAsync(followerAndPhotoModel.ContentItemId, VersionOptions.DraftRequired);
+
+            if (contentItem == null)
+            {
+                return StatusCode(204);
+            }
+            else
+            {
+                if (!await _authorizationService.AuthorizeAsync(User, Permissions.EditOwnContent, contentItem))
+                {
+                    return Unauthorized();
+                }
+            }
+
+            dynamic jsonObj = contentItem.Content;
+            jsonObj["Influencer"]["NumberOfFollowers"]["Value"] = followerAndPhotoModel.NumberOfFollowers;
+
+            var photos = jsonObj["Influencer"]["Photo"]["Paths"];
+
+            foreach (var item in followerAndPhotoModel.PhotoPaths)
+            {
+                photos.Add(item);
+            }
+
+            //jsonObj["Influencer"]["Photo"]["Paths"] = followerAndPhotoModel.PhotoPaths;
+            contentItem.ModifiedUtc = DateTime.Now;
+
+            await _contentManager.UpdateAsync(contentItem);
+
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!draft)
+            {
+                await _contentManager.PublishAsync(contentItem);
+            }
+
+            return Ok(contentItem);
+        }
+
+        [HttpPost]
+        [ActionName("UpdatePosts")]
+        [EnableCors("MyPolicy")]
+        public async Task<IActionResult> UpdatePosts(UpdatePostModel updatePostModel, bool draft = false)
+        {
+            var contentItem = await _contentManager.GetAsync(updatePostModel.ContentItemId, VersionOptions.DraftRequired);
+
+            if (contentItem == null)
+            {
+                return StatusCode(204);
+            }
+            else
+            {
+                if (!await _authorizationService.AuthorizeAsync(User, Permissions.EditOwnContent, contentItem))
+                {
+                    return Unauthorized();
+                }
+            }
+
+            dynamic jsonObj = contentItem.Content;
+            jsonObj["Influencer"]["NumberOfPost"]["Value"] = updatePostModel.NumberOfPost;
+            jsonObj["Influencer"]["NumberOfShare"]["Text"] = updatePostModel.NumberOfTotalShare;
+            jsonObj["Influencer"]["NumberOfReaction"]["Text"] = updatePostModel.NumberOfTotalReaction;
+            jsonObj["Influencer"]["NumberOfComment"]["Text"] = updatePostModel.NumberOfTotalComment;
+
+            var indx = 0;
+
+            foreach (var item in updatePostModel.Posts)
+            {
+                indx++;
+                if (indx > updatePostModel.Posts.Count)
+                {
+                    break;
+                }
+                else
+                {
+                    jsonObj["Post" + indx.ToString()]["Link"]["Text"] = item.Link ?? "";
+                    jsonObj["Post" + indx.ToString()]["NumberOfComment"]["Text"] = item.NumberOfComment;
+                    jsonObj["Post" + indx.ToString()]["NumberOfReaction"]["Text"] = item.NumberOfReaction;
+                    jsonObj["Post" + indx.ToString()]["NumberOfShare"]["Text"] = item.NumberOfShare;
+                    jsonObj["Post" + indx.ToString()]["Status"]["Text"] = item.Status;
+                    jsonObj["Post" + indx.ToString()]["Time"]["Text"] = item.Time;
+                    jsonObj["Post" + indx.ToString()]["Title"]["Text"] = item.Title;
+                    jsonObj["Post" + indx.ToString()]["Type"]["Text"] = item.Type;
+                }
+
+            }
+
+            //jsonObj["Influencer"]["Photo"]["Paths"] = followerAndPhotoModel.PhotoPaths;
             contentItem.ModifiedUtc = DateTime.Now;
 
             await _contentManager.UpdateAsync(contentItem);
