@@ -48,4 +48,11 @@ namespace OrchardCore.ContentManagement.Models
         public string Title { get; set; }
         public string Type { get; set; }
     }
+
+    public class UpdateDisplayModel
+    {
+        public string ContentItemId { get; set; }
+        public string DisplayText { get; set; }
+    }
+    
 }

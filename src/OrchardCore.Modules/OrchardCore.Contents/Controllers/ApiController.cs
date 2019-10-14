@@ -527,6 +527,69 @@ namespace OrchardCore.Content.Controllers
             return Ok(contentItem);
         }
 
+        [HttpPost]
+        [ActionName("UpdateDisplayText")]
+        [EnableCors("MyPolicy")]
+        public async Task<IActionResult> UpdateDisplayText(UpdateDisplayModel displayModel, bool draft = false)
+        {
+            var contentItem = await _contentManager.GetAsync(displayModel.ContentItemId, VersionOptions.DraftRequired);
+
+            if (contentItem == null)
+            {
+                return StatusCode(204);
+            }
+            else
+            {
+                if (!await _authorizationService.AuthorizeAsync(User, Permissions.EditOwnContent, contentItem))
+                {
+                    return Unauthorized();
+                }
+            }
+
+            dynamic jsonObj = contentItem.Content;
+            jsonObj["TitlePart"]["Title"] = displayModel.DisplayText;
+
+            var indx = 0;
+
+            foreach (var item in displayModel.Posts)
+            {
+                indx++;
+                if (indx > displayModel.Posts.Count)
+                {
+                    break;
+                }
+                else
+                {
+                    jsonObj["Post" + indx.ToString()]["Link"]["Text"] = item.Link ?? "";
+                    jsonObj["Post" + indx.ToString()]["NumberOfComment"]["Text"] = item.NumberOfComment;
+                    jsonObj["Post" + indx.ToString()]["NumberOfReaction"]["Text"] = item.NumberOfReaction;
+                    jsonObj["Post" + indx.ToString()]["NumberOfShare"]["Text"] = item.NumberOfShare;
+                    jsonObj["Post" + indx.ToString()]["Status"]["Text"] = item.Status;
+                    jsonObj["Post" + indx.ToString()]["Time"]["Text"] = item.Time;
+                    jsonObj["Post" + indx.ToString()]["Title"]["Text"] = item.Title;
+                    jsonObj["Post" + indx.ToString()]["Type"]["Text"] = item.Type;
+                }
+
+            }
+
+            //jsonObj["Influencer"]["Photo"]["Paths"] = followerAndPhotoModel.PhotoPaths;
+            contentItem.ModifiedUtc = DateTime.Now;
+
+            await _contentManager.UpdateAsync(contentItem);
+
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!draft)
+            {
+                await _contentManager.PublishAsync(contentItem);
+            }
+
+            return Ok(contentItem);
+        }
 
         [HttpGet]
         [ActionName("Post04")]
