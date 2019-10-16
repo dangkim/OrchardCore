@@ -549,29 +549,6 @@ namespace OrchardCore.Content.Controllers
             dynamic jsonObj = contentItem.Content;
             jsonObj["TitlePart"]["Title"] = displayModel.DisplayText;
 
-            var indx = 0;
-
-            foreach (var item in displayModel.Posts)
-            {
-                indx++;
-                if (indx > displayModel.Posts.Count)
-                {
-                    break;
-                }
-                else
-                {
-                    jsonObj["Post" + indx.ToString()]["Link"]["Text"] = item.Link ?? "";
-                    jsonObj["Post" + indx.ToString()]["NumberOfComment"]["Text"] = item.NumberOfComment;
-                    jsonObj["Post" + indx.ToString()]["NumberOfReaction"]["Text"] = item.NumberOfReaction;
-                    jsonObj["Post" + indx.ToString()]["NumberOfShare"]["Text"] = item.NumberOfShare;
-                    jsonObj["Post" + indx.ToString()]["Status"]["Text"] = item.Status;
-                    jsonObj["Post" + indx.ToString()]["Time"]["Text"] = item.Time;
-                    jsonObj["Post" + indx.ToString()]["Title"]["Text"] = item.Title;
-                    jsonObj["Post" + indx.ToString()]["Type"]["Text"] = item.Type;
-                }
-
-            }
-
             //jsonObj["Influencer"]["Photo"]["Paths"] = followerAndPhotoModel.PhotoPaths;
             contentItem.ModifiedUtc = DateTime.Now;
 
