@@ -397,6 +397,7 @@ namespace OrchardCore.Content.Controllers
 
             //jsonObj["Influencer"]["Photo"]["Paths"] = followerAndPhotoModel.PhotoPaths;
             contentItem.ModifiedUtc = DateTime.Now;
+            contentItem.Latest = true;
 
             await _contentManager.UpdateAsync(contentItem);
 
@@ -462,8 +463,8 @@ namespace OrchardCore.Content.Controllers
 
             }
 
-            //jsonObj["Influencer"]["Photo"]["Paths"] = followerAndPhotoModel.PhotoPaths;
             contentItem.ModifiedUtc = DateTime.Now;
+            contentItem.Latest = true;
 
             await _contentManager.UpdateAsync(contentItem);
 
@@ -501,6 +502,7 @@ namespace OrchardCore.Content.Controllers
             }
 
             dynamic jsonObj = contentItem.Content;
+            contentItem.Latest = true;
 
             var videoLinks = jsonObj["Influencer"]["VideoLink"]["Paths"];
 
@@ -549,11 +551,10 @@ namespace OrchardCore.Content.Controllers
             dynamic jsonObj = contentItem.Content;
             jsonObj["TitlePart"]["Title"] = displayModel.DisplayText;
 
-            //jsonObj["Influencer"]["Photo"]["Paths"] = followerAndPhotoModel.PhotoPaths;
             contentItem.ModifiedUtc = DateTime.Now;
+            contentItem.Latest = true;
 
             await _contentManager.UpdateAsync(contentItem);
-
 
             if (!ModelState.IsValid)
             {
