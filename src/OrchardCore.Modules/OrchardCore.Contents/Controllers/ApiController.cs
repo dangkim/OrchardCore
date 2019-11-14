@@ -506,6 +506,11 @@ namespace OrchardCore.Content.Controllers
 
             var videoLinks = jsonObj["Influencer"]["VideoLink"]["Paths"];
 
+            if (videoModel.VideoPaths.Count > 0)
+            {
+                videoLinks.Clear();
+            }
+
             foreach (var item in videoModel.VideoPaths)
             {
                 videoLinks.Add(item);
