@@ -37,6 +37,16 @@ namespace OrchardCore.ContentManagement.Models
         public string NumberOfPost { get; set; }        
     }
 
+    public class UpdateBrandModel
+    {
+        public string ContentItemId { get; set; }
+        public string FullName { get; set; }
+        public string BrandName { get; set; }
+        public string BusinessAreas { get; set; }
+        public string Phone { get; set; }
+        public string Location { get; set; }
+    }
+
     public class PostModel
     {
         public string Link { get; set; }

@@ -594,5 +594,50 @@ namespace OrchardCore.Content.Controllers
             return StatusCode(204);
 
         }
+
+        [HttpPost]
+        [ActionName("UpdateBrand")]
+        [EnableCors("MyPolicy")]
+        public async Task<IActionResult> UpdateBrand(UpdateBrandModel updateBrandModel, bool draft = false)
+        {
+            var contentItem = await _contentManager.GetAsync(updateBrandModel.ContentItemId, VersionOptions.DraftRequired);
+
+            if (contentItem == null)
+            {
+                return StatusCode(204);
+            }
+            else
+            {
+                if (!await _authorizationService.AuthorizeAsync(User, Permissions.EditOwnContent, contentItem))
+                {
+                    return Unauthorized();
+                }
+            }
+
+            dynamic jsonObj = contentItem.Content;
+            jsonObj["Brand"]["FullName"]["Text"] = updateBrandModel.FullName;
+            jsonObj["Brand"]["BrandName"]["Text"] = updateBrandModel.BrandName;
+            jsonObj["Brand"]["BusinessAreas"]["Text"] = updateBrandModel.BusinessAreas;
+            jsonObj["Brand"]["Phone"]["Text"] = updateBrandModel.Phone;
+            jsonObj["Brand"]["Location"]["Text"] = updateBrandModel.Location;
+
+            contentItem.ModifiedUtc = DateTime.Now;
+            contentItem.Latest = true;
+
+            await _contentManager.UpdateAsync(contentItem);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!draft)
+            {
+                await _contentManager.PublishAsync(contentItem);
+            }
+
+            return Ok(contentItem);
+        }
+
     }
 }
