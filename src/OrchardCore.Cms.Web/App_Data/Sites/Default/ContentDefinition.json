@@ -1934,6 +1934,13 @@
             "DisplayName": "ExpiredIn",
             "Position": "1"
           }
+        },
+        {
+          "FieldName": "MediaField",
+          "Name": "Avatar",
+          "Settings": {
+            "DisplayName": "Avatar"
+          }
         }
       ]
     },
@@ -2270,5 +2277,5 @@
       ]
     }
   ],
-  "Serial": 1163
+  "Serial": 1166
 }

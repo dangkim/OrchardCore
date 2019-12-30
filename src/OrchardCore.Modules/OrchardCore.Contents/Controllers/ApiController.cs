@@ -1,21 +1,30 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Models;
 using OrchardCore.Contents;
 using OrchardCore.Contents.Models;
+using OrchardCore.Environment.Shell.Configuration;
+using OrchardCore.FileStorage;
+using OrchardCore.Media;
+using OrchardCore.Users;
 using OrchardCore.Users.Models;
 using OrchardCore.Users.Services;
 using OrchardCore.Users.ViewModels;
+using Permissions = OrchardCore.Contents.Permissions;
 
 namespace OrchardCore.Content.Controllers
 {
@@ -24,22 +33,64 @@ namespace OrchardCore.Content.Controllers
     [Authorize(AuthenticationSchemes = "Api"), IgnoreAntiforgeryToken]
     public class ApiController : Controller
     {
+        private static string[] DefaultAllowedFileExtensions = new string[] {
+            // Images
+            ".jpg",
+            ".jpeg",
+            ".png",
+            ".gif",
+            ".ico",
+            ".svg",
+
+            // Documents
+            ".pdf", // (Portable Document Format; Adobe Acrobat)
+            ".doc", ".docx", // (Microsoft Word Document)
+            ".ppt", ".pptx", ".pps", ".ppsx", // (Microsoft PowerPoint Presentation)
+            ".odt", // (OpenDocument Text Document)
+            ".xls", ".xlsx", // (Microsoft Excel Document)
+            ".psd", // (Adobe Photoshop Document)
+
+            // Audio
+            ".mp3",
+            ".m4a",
+            ".ogg",
+            ".wav",
+
+            // Video
+            ".mp4", ".m4v", // (MPEG-4)
+            ".mov", // (QuickTime)
+            ".wmv", // (Windows Media Video)
+            ".avi",
+            ".mpg",
+            ".ogv", // (Ogg)
+            ".3gp", // (3GPP)
+        };
+
         static readonly HttpClient Client = new HttpClient();
+        private readonly IMediaFileStore _mediaFileStore;
         private readonly IContentManager _contentManager;
         private readonly IAuthorizationService _authorizationService;
         private readonly IContentItemIdGenerator _idGenerator;
         private readonly IUserService _userService;
+        private readonly UserManager<IUser> _userManager;
+        private readonly IShellConfiguration _shellConfiguration;
 
         public ApiController(
             IContentManager contentManager,
             IAuthorizationService authorizationService,
             IContentItemIdGenerator idGenerator,
-            IUserService userService)
+            IUserService userService,
+            UserManager<IUser> userManager,
+            IShellConfiguration shellConfiguration,
+            IMediaFileStore mediaFileStore)
         {
             _authorizationService = authorizationService;
             _contentManager = contentManager;
             _idGenerator = idGenerator;
             _userService = userService;
+            _userManager = userManager;
+            _shellConfiguration = shellConfiguration;
+            _mediaFileStore = mediaFileStore;
         }
 
         private async Task<HttpResponseMessage> GetAsync(string url)
@@ -245,82 +296,6 @@ namespace OrchardCore.Content.Controllers
                 return StatusCode(204);
             }
         }
-
-        //[HttpPost]
-        //[ActionName("RegisterBrand")]
-        //[EnableCors("MyPolicy"), AllowAnonymous]
-        //public async Task<IActionResult> RegisterBrand(ContentItem newContentItem, bool draft = false)
-        //{
-        //    var roleNames = new List<string>();
-
-        //    if (!String.IsNullOrEmpty(newContentItem.DisplayText) && newContentItem.ContentType == "Brand")
-        //    {
-        //        roleNames.Add("Brand");
-        //    }
-
-        //    var user = await _userService.CreateUserAsync(new User { UserName = newContentItem.DisplayText, Email = newContentItem.DisplayText, EmailConfirmed = true, RoleNames = roleNames }, model.Password, (key, message) => ModelState.AddModelError(key, message)) as User;
-
-        //    if (user != null)
-        //    {
-        //        return Ok(model.UserName);
-        //    }
-        //    else
-        //    {
-        //        return StatusCode(204);
-        //    }
-        //}
-
-        //[HttpPost]
-        //[ActionName("Post03")]
-        //[EnableCors("MyPolicy")]
-        //public async Task<IActionResult> Post03(ContentItem newContentItem, bool draft = false)
-        //{
-        //    var contentItem = await _contentManager.GetAsync(newContentItem.ContentItemId, VersionOptions.DraftRequired);
-
-        //    if (contentItem == null)
-        //    {
-        //        return StatusCode(204);
-        //    }
-        //    else
-        //    {
-        //        if (!await _authorizationService.AuthorizeAsync(User, Permissions.EditOwnContent, contentItem))
-        //        {
-        //            return Unauthorized();
-        //        }
-        //    }
-
-        //    if (contentItem != newContentItem)
-        //    {
-        //        //string json = contentItem.Content;
-        //        dynamic jsonObj = newContentItem.Content;
-        //        jsonObj["Influencer"]["ShareLink"]["Text"] = "650000";
-        //        //string output = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
-        //        //File.WriteAllText("settings.json", output);
-
-        //        contentItem.DisplayText = newContentItem.DisplayText;
-        //        contentItem.ModifiedUtc = newContentItem.ModifiedUtc;
-        //        contentItem.PublishedUtc = newContentItem.PublishedUtc;
-        //        contentItem.CreatedUtc = newContentItem.CreatedUtc;
-        //        contentItem.Owner = newContentItem.Owner;
-        //        contentItem.Author = newContentItem.Author;
-
-        //        contentItem.Apply(newContentItem);
-
-        //        await _contentManager.UpdateAsync(contentItem);
-        //    }
-
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    if (!draft)
-        //    {
-        //        await _contentManager.PublishAsync(contentItem);
-        //    }
-
-        //    return Ok(contentItem);
-        //}
 
         [HttpPost]
         [ActionName("Post03")]
@@ -639,5 +614,142 @@ namespace OrchardCore.Content.Controllers
             return Ok(contentItem);
         }
 
+        [HttpPost]
+        [ActionName("UploadAvatar")]
+        [EnableCors("MyPolicy")]
+        public async Task<ActionResult<object>> UploadAvatar([FromForm]UploadAvatarModel uploadAvatarModel)
+        {
+            var path = "";
+            if (!await _authorizationService.AuthorizeAsync(User, Permissions.EditOwnContent))
+            {
+                return Unauthorized();
+            }
+
+            if (!String.IsNullOrEmpty(uploadAvatarModel.Path))
+            {
+                path = uploadAvatarModel.Path;
+            }
+
+            var section = _shellConfiguration.GetSection("OrchardCore.Media");
+
+            // var maxUploadSize = section.GetValue("MaxRequestBodySize", 100_000_000);
+            var maxFileSize = section.GetValue("MaxFileSize", 30_000_000);
+            var allowedFileExtensions = section.GetSection("AllowedFileExtensions").Get<string[]>() ?? DefaultAllowedFileExtensions;
+
+            var result = new object();
+
+            // Loop through each file in the request
+            foreach (var file in uploadAvatarModel.Files)
+            {
+                // TODO: support clipboard
+
+                if (!allowedFileExtensions.Contains(Path.GetExtension(file.FileName), StringComparer.OrdinalIgnoreCase))
+                {
+                    result = new
+                    {
+                        name = file.FileName,
+                        size = file.Length,
+                        folder = path,
+                        error = String.Format("This file extension is not allowed: {0}", Path.GetExtension(file.FileName).ToString())
+                    };
+
+                    return NotFound(result);
+                }
+
+                if (file.Length > maxFileSize)
+                {
+                    result = new
+                    {
+                        name = file.FileName,
+                        size = file.Length,
+                        folder = path,
+                        error = String.Format("The file {0} is too big. The limit is {1}MB", file.FileName, (int)Math.Floor((double)maxFileSize / 1024 / 1024))
+                    };
+
+                    return NotFound(result);
+                }
+
+                try
+                {
+                    var mediaFilePath = _mediaFileStore.Combine(path, file.FileName);
+
+                    using (var stream = file.OpenReadStream())
+                    {
+                        await _mediaFileStore.CreateFileFromStream(mediaFilePath, stream);
+                    }
+
+                    var mediaFile = await _mediaFileStore.GetFileInfoAsync(mediaFilePath);
+
+                    result = new
+                    {
+                        name = mediaFile.Name,
+                        size = mediaFile.Length,
+                        folder = mediaFile.DirectoryPath,
+                        url = _mediaFileStore.MapPathToPublicUrl(mediaFile.Path),
+                        mediaPath = mediaFile.Path,
+                    };
+                }
+                catch (Exception ex)
+                {
+                    result = new
+                    {
+                        name = file.FileName,
+                        size = file.Length,
+                        folder = path,
+                        error = ex.Message
+                    };
+
+                    return NotFound(result);
+                }
+            }
+
+            return new { files = result };
+        }
+
+
+        //[HttpPost]
+        //[ActionName("ChangePassword")]
+        //[EnableCors("MyPolicy")]
+        //public async Task<IActionResult> ChangePassword(ChangePasswordModel changePasswordModel)
+        //{
+        //    var contentItem = await _contentManager.GetAsync(changePasswordModel.ContentItemId, VersionOptions.DraftRequired);
+
+        //    if (contentItem == null)
+        //    {
+        //        return StatusCode(204);
+        //    }
+        //    else
+        //    {
+        //        if (!await _authorizationService.AuthorizeAsync(User, Permissions.EditOwnContent, contentItem))
+        //        {
+        //            return Unauthorized();
+        //        }
+        //    }
+
+        //    dynamic jsonObj = contentItem.Content;
+
+        //    if (jsonObj["Brand"]["Email"]["Text"] != changePasswordModel.Email)
+        //    {
+        //        return Unauthorized();
+        //    }
+        //    else
+        //    {
+        //        var user = await _userManager.FindByEmailAsync(model.Email) as User;
+
+        //        if (user == null)
+        //        {
+        //            return NotFound();
+        //        }
+
+        //        var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+        //        if (await _userService.ResetPasswordAsync(model.Email, token, model.NewPassword, ModelState.AddModelError))
+        //        {
+        //            _notifier.Success(TH["Password updated correctly."]);
+
+        //            return RedirectToAction(nameof(Index));
+        //        }
+        //    }
+        //}
     }
 }

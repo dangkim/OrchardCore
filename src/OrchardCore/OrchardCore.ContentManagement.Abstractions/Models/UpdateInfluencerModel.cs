@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
+using Microsoft.AspNetCore.Http;
 
 namespace OrchardCore.ContentManagement.Models
 {
@@ -64,5 +66,27 @@ namespace OrchardCore.ContentManagement.Models
         public string ContentItemId { get; set; }
         public string DisplayText { get; set; }
     }
-    
+
+    public class ChangePasswordModel
+    {
+        [Required]
+        public string Email { get; set; }
+
+        [Required]
+        public string ContentItemId { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Compare("Password")]
+        public string PasswordConfirmation { get; set; }
+    }
+
+    public class UploadAvatarModel
+    {
+        public string Path { get; set; }
+        public ICollection<IFormFile> Files { get; set; }
+    }
 }
