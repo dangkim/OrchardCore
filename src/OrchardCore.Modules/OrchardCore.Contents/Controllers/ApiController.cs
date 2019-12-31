@@ -619,15 +619,20 @@ namespace OrchardCore.Content.Controllers
         [EnableCors("MyPolicy")]
         public async Task<ActionResult<object>> UploadAvatar([FromForm]UploadAvatarModel uploadAvatarModel)
         {
-            var path = "";
-            if (!await _authorizationService.AuthorizeAsync(User, Permissions.EditOwnContent))
-            {
-                return Unauthorized();
-            }
+            var path = "team";
 
-            if (!String.IsNullOrEmpty(uploadAvatarModel.Path))
+            var contentItem = await _contentManager.GetAsync(uploadAvatarModel.ContentItemId, VersionOptions.DraftRequired);
+
+            if (contentItem == null)
             {
-                path = uploadAvatarModel.Path;
+                return StatusCode(204);
+            }
+            else
+            {
+                if (!await _authorizationService.AuthorizeAsync(User, Permissions.EditOwnContent, contentItem))
+                {
+                    return Unauthorized();
+                }
             }
 
             var section = _shellConfiguration.GetSection("OrchardCore.Media");
@@ -671,11 +676,14 @@ namespace OrchardCore.Content.Controllers
 
                 try
                 {
-                    var mediaFilePath = _mediaFileStore.Combine(path, file.FileName);
+                    // File Name will be ContentItemId
+                    var fileName = uploadAvatarModel.ContentItemId + Path.GetExtension(file.FileName).ToString();
+
+                    var mediaFilePath = _mediaFileStore.Combine(path, fileName);
 
                     using (var stream = file.OpenReadStream())
                     {
-                        await _mediaFileStore.CreateFileFromStream(mediaFilePath, stream);
+                        await _mediaFileStore.CreateFileFromStream(mediaFilePath, stream, true);
                     }
 
                     var mediaFile = await _mediaFileStore.GetFileInfoAsync(mediaFilePath);

@@ -86,7 +86,7 @@ namespace OrchardCore.ContentManagement.Models
 
     public class UploadAvatarModel
     {
-        public string Path { get; set; }
+        public string ContentItemId { get; set; }
         public ICollection<IFormFile> Files { get; set; }
     }
 }
