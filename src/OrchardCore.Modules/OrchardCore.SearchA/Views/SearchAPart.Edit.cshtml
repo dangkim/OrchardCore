@@ -1,0 +1,9 @@
+@using OrchardCore.SearchA.ViewModels;
+@model SearchAPartViewModel
+
+<fieldset class="form-group" asp-validation-class-for="SearchValue">
+    <label asp-for="SearchValue">@T["SearchValue"]</label>
+    <input asp-for="SearchValue" class="form-control content-preview-text content-caption-text" autofocus="autofocus" />
+    <span asp-validation-for="SearchValue"></span>
+    <span class="hint">@T["The search value of the content item."]</span>
+</fieldset>

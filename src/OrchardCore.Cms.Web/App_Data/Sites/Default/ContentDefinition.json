@@ -779,7 +779,7 @@
           "PartName": "Brand",
           "Name": "Brand",
           "Settings": {
-            "Position": "1"
+            "Position": "2"
           }
         },
         {
@@ -787,6 +787,13 @@
           "Name": "TitlePart",
           "Settings": {
             "Position": "0"
+          }
+        },
+        {
+          "PartName": "SearchAPart",
+          "Name": "SearchAPart",
+          "Settings": {
+            "Position": "1"
           }
         }
       ]
@@ -2299,7 +2306,16 @@
           }
         }
       ]
+    },
+    {
+      "Name": "SearchAPart",
+      "Settings": {
+        "Attachable": "True",
+        "Description": "Provides a SearchA for your content item.",
+        "DefaultPosition": "0"
+      },
+      "ContentPartFieldDefinitionRecords": []
     }
   ],
-  "Serial": 1203
+  "Serial": 1211
 }

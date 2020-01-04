@@ -56,6 +56,7 @@
         "OrchardCore.Menu",
         "OrchardCore.Queries",
         "OrchardCore.Title",
+        "OrchardCore.SearchA",
         "OrchardCore.Templates",
         "OrchardCore.Widgets",
 

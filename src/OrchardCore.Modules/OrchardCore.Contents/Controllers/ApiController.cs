@@ -626,6 +626,7 @@ namespace OrchardCore.Content.Controllers
             if (contentItem == null)
             {
                 return StatusCode(204);
+
             }
             else
             {
