@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
+using OrchardCore.SearchA.Models;
 using OrchardCore.Indexing;
-using OrchardCore.SearchA.Model;
 
 namespace OrchardCore.SearchA.Indexing
 {
@@ -8,13 +8,11 @@ namespace OrchardCore.SearchA.Indexing
     {
         public override Task BuildIndexAsync(SearchAPart part, BuildPartIndexContext context)
         {
-            var options = context.Settings.ToOptions() 
-                | DocumentIndexOptions.Analyze
-                ;
+            var options = DocumentIndexOptions.Store;
 
             foreach (var key in context.Keys)
             {
-                context.DocumentIndex.Set(key, part.SearchValue, options);
+                context.DocumentIndex.Set(key, part.SearchA, options);
             }
 
             return Task.CompletedTask;

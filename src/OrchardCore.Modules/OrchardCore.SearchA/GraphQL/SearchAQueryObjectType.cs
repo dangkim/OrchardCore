@@ -1,6 +1,6 @@
 using GraphQL.Types;
 using Microsoft.Extensions.Localization;
-using OrchardCore.SearchA.Model;
+using OrchardCore.SearchA.Models;
 
 namespace OrchardCore.SearchA.GraphQL
 {
@@ -9,9 +9,9 @@ namespace OrchardCore.SearchA.GraphQL
         public SearchAQueryObjectType(IStringLocalizer<SearchAQueryObjectType> T)
         {
             Name = "SearchAPart";
-            Description = T["The value for searching for your content item."];
+            Description = T["Alternative path for the content item"];
 
-            Field(x => x.SearchValue).Description(T["The search value for your content item."]);
+            Field("SearchA", x => x.SearchA, true);
         }
     }
 }

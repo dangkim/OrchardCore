@@ -1,9 +1,14 @@
-@using OrchardCore.SearchA.ViewModels;
 @model SearchAPartViewModel
 
-<fieldset class="form-group" asp-validation-class-for="SearchValue">
-    <label asp-for="SearchValue">@T["SearchValue"]</label>
-    <input asp-for="SearchValue" class="form-control content-preview-text content-caption-text" autofocus="autofocus" />
-    <span asp-validation-for="SearchValue"></span>
-    <span class="hint">@T["The search value of the content item."]</span>
-</fieldset>
+<div class="form-group" asp-validation-class-for="SearchA">
+    <label asp-for="SearchA">@T["SearchA"] </label>
+    <input asp-for="SearchA" class="form-control text-muted" />
+    <span asp-validation-for="SearchA"></span>
+    <span class="hint">
+        @T["The searchA of the content item."]
+        @if (!String.IsNullOrWhiteSpace(Model.Settings.Pattern))
+        {
+            @T["Leave empty to re-generate it."]
+        } 
+    </span>       
+</div>

@@ -1,14 +1,13 @@
-using System;
-using OrchardCore.SearchA.Model;
+using OrchardCore.ContentManagement;
+using OrchardCore.SearchA.Models;
 using YesSql.Indexes;
 
-namespace OrchardCore.ContentManagement.Records
+namespace OrchardCore.SearchA.Indexes
 {
     public class SearchAPartIndex : MapIndex
     {
         public string ContentItemId { get; set; }
-        public string SearchValue { get; set; }
-        public bool Published { get; set; }
+        public string SearchA { get; set; }
     }
 
     public class SearchAPartIndexProvider : IndexProvider<ContentItem>
@@ -18,18 +17,23 @@ namespace OrchardCore.ContentManagement.Records
             context.For<SearchAPartIndex>()
                 .Map(contentItem =>
                 {
-                    var searchValue = contentItem.As<SearchAPart>()?.SearchValue;
-                    if (!String.IsNullOrEmpty(searchValue) && (contentItem.Published || contentItem.Latest))
+                    if (!contentItem.IsPublished())
                     {
-                        return new SearchAPartIndex
-                        {
-                            ContentItemId = contentItem.ContentItemId,
-                            SearchValue = searchValue,
-                            Published = contentItem.Published
-                        };
+                        return null;
                     }
 
-                    return null;
+                    var SearchAPart = contentItem.As<SearchAPart>();
+
+                    if (SearchAPart?.SearchA == null)
+                    {
+                        return null;
+                    }
+
+                    return new SearchAPartIndex
+                    {
+                        SearchA = SearchAPart.SearchA.ToLowerInvariant(),
+                        ContentItemId = contentItem.ContentItemId,
+                    };
                 });
         }
     }

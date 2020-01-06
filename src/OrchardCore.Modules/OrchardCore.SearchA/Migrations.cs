@@ -1,101 +1,36 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Metadata.Settings;
 using OrchardCore.ContentManagement.Metadata;
-using OrchardCore.ContentManagement.Records;
 using OrchardCore.Data.Migration;
-using Newtonsoft.Json.Linq;
-using YesSql;
-using Microsoft.Extensions.Logging;
+using OrchardCore.SearchA.Indexes;
+using OrchardCore.SearchA.Models;
 
 namespace OrchardCore.SearchA
 {
     public class Migrations : DataMigration
     {
         IContentDefinitionManager _contentDefinitionManager;
-        private readonly ISession _session;
-        private readonly ILogger<Migrations> _logger;
 
-        public Migrations(
-            IContentDefinitionManager contentDefinitionManager, 
-            ISession session,
-            ILogger<Migrations> logger)
+        public Migrations(IContentDefinitionManager contentDefinitionManager)
         {
             _contentDefinitionManager = contentDefinitionManager;
-            _session = session;
-            _logger = logger;
         }
 
         public int Create()
         {
-            _contentDefinitionManager.AlterPartDefinition("SearchAPart", builder => builder
+            _contentDefinitionManager.AlterPartDefinition(nameof(SearchAPart), builder => builder
                 .Attachable()
-                .WithDescription("Provides a SearchA for your content item.")
-                .WithDefaultPosition("0")
-                );
+                .WithDescription("Provides a way to define custom SearchAes for content items."));
 
-            return 2;
-        }
-        
-        public async Task<int> UpdateFrom1()
-        {
-            // This code can be removed in RC
-            // We are patching all content item versions by moving the SearchA to DisplayText
-            // This step doesn't need to be executed for a brand new site
+            SchemaBuilder.CreateMapIndexTable(nameof(SearchAPartIndex), table => table
+                .Column<string>("SearchA", col => col.WithLength(64))
+                .Column<string>("ContentItemId", c => c.WithLength(26))
+            );
 
-            var lastDocumentId = 0;
+            SchemaBuilder.AlterTable(nameof(SearchAPartIndex), table => table
+                .CreateIndex("IDX_SearchAPartIndex_SearchA", "SearchA")
+            );
 
-            for(;;)
-            {
-                var contentItemVersions = await _session.Query<ContentItem, ContentItemIndex>(x => x.DocumentId > lastDocumentId).Take(10).ListAsync();
-                
-                if (!contentItemVersions.Any())
-                {
-                    // No more content item version to process
-                    break;
-                }
-
-                foreach(var contentItemVersion in contentItemVersions)
-                {
-                    if (String.IsNullOrEmpty(contentItemVersion.DisplayText)
-                        && UpdateSearchAPart(contentItemVersion.Content))
-                    {
-                        _session.Save(contentItemVersion);
-                        _logger.LogInformation($"A content item version's SearchA was upgraded: '{contentItemVersion.ContentItemVersionId}'");
-                    }
-
-                    lastDocumentId = contentItemVersion.Id;
-                }
-
-                await _session.CommitAsync();
-            } 
-
-            bool UpdateSearchAPart(JToken content)
-            {
-                var changed = false;
-
-                if (content.Type == JTokenType.Object)
-                {
-                    var searchValue = content["SearchAPart"] ? ["SearchAPart"]?.Value<string>();
-                    
-                    if (!String.IsNullOrWhiteSpace(searchValue))
-                    {
-                        content["DisplayText"] = searchValue;
-                        changed = true;
-                    }
-                }
-
-                foreach (var token in content)
-                {
-                    changed = UpdateSearchAPart(token) || changed;
-                }
-
-                return changed;
-            }
-
-            return 2;
+            return 1;
         }
     }
 }

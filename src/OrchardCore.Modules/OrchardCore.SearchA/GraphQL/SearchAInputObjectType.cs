@@ -1,7 +1,7 @@
 using GraphQL.Types;
 using Microsoft.Extensions.Localization;
+using OrchardCore.SearchA.Models;
 using OrchardCore.Apis.GraphQL.Queries;
-using OrchardCore.SearchA.Model;
 
 namespace OrchardCore.SearchA.GraphQL
 {
@@ -10,9 +10,9 @@ namespace OrchardCore.SearchA.GraphQL
         public SearchAInputObjectType(IStringLocalizer<SearchAInputObjectType> T)
         {
             Name = "SearchAPartInput";
-            Description = T["the search value A part of the content item"];
+            Description = T["the search value part of the content item"];
 
-            AddScalarFilterFields<StringGraphType>("searchValue", T["the path of the content item to filter"]);
+            AddScalarFilterFields<StringGraphType>("SearchA", T["the search value of the content item"]);
         }
     }
 }

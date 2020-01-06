@@ -1,14 +1,23 @@
 using Fluid;
 using Microsoft.Extensions.DependencyInjection;
+using OrchardCore.SearchA.Drivers;
+using OrchardCore.SearchA.Handlers;
+using OrchardCore.SearchA.Indexes;
+using OrchardCore.SearchA.Indexing;
+using OrchardCore.SearchA.Liquid;
+using OrchardCore.SearchA.Models;
+using OrchardCore.SearchA.Services;
+using OrchardCore.SearchA.Settings;
+using OrchardCore.SearchA.ViewModels;
 using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Display.ContentDisplay;
+using OrchardCore.ContentManagement.Handlers;
+using OrchardCore.ContentTypes.Editors;
 using OrchardCore.Data.Migration;
 using OrchardCore.Indexing;
+using OrchardCore.Liquid;
 using OrchardCore.Modules;
-using OrchardCore.SearchA.Drivers;
-using OrchardCore.SearchA.Indexing;
-using OrchardCore.SearchA.Model;
-using OrchardCore.SearchA.ViewModels;
+using YesSql.Indexes;
 
 namespace OrchardCore.SearchA
 {
@@ -21,12 +30,19 @@ namespace OrchardCore.SearchA
 
         public override void ConfigureServices(IServiceCollection services)
         {
-            // SearchA Part
-            services.AddScoped<IContentPartDisplayDriver, SearchAPartDisplay>();
-            services.AddSingleton<ContentPart, SearchAPart>();
-            services.AddScoped<IContentPartIndexHandler, SearchAPartIndexHandler>();
-
+            services.AddSingleton<IIndexProvider, SearchAPartIndexProvider>();
             services.AddScoped<IDataMigration, Migrations>();
+            services.AddScoped<IContentSearchAProvider, SearchAPartContentSearchAProvider>();
+
+            // Identity Part
+            services.AddScoped<IContentPartDisplayDriver, SearchAPartDisplayDriver>();
+            services.AddSingleton<ContentPart, SearchAPart>();
+            services.AddScoped<IContentPartHandler, SearchAPartHandler>();
+            services.AddScoped<IContentPartIndexHandler, SearchAPartIndexHandler>();
+            services.AddScoped<IContentTypePartDefinitionDisplayDriver, SearchAPartSettingsDisplayDriver>();
+
+
+            services.AddScoped<ILiquidTemplateEventHandler, ContentSearchALiquidTemplateEventHandler>();
         }
     }
 }

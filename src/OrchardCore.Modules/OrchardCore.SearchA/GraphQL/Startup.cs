@@ -1,7 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
+using OrchardCore.SearchA.Models;
 using OrchardCore.Apis;
-using OrchardCore.SearchA.Model;
-using OrchardCore.ContentManagement.GraphQL;
 using OrchardCore.ContentManagement.GraphQL.Queries;
 using OrchardCore.Modules;
 
@@ -12,9 +11,9 @@ namespace OrchardCore.SearchA.GraphQL
     {
         public override void ConfigureServices(IServiceCollection services)
         {
-            services.AddInputObjectGraphType<SearchAPart, SearchAInputObjectType>();
             services.AddObjectGraphType<SearchAPart, SearchAQueryObjectType>();
-            services.AddTransient<IIndexAliasProvider, SearchAPartIndexAliasProvider>();
+            services.AddInputObjectGraphType<SearchAPart, SearchAInputObjectType>();
+            services.AddTransient<IIndexSearchAProvider, SearchAPartIndexSearchAProvider>();
         }
     }
 }
