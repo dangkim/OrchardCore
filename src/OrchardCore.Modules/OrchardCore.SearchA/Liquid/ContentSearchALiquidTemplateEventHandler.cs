@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using Fluid;
 using Fluid.Values;
-using OrchardCore.SearchA.Indexes;
 using OrchardCore.ContentManagement;
+using OrchardCore.ContentManagement.Records;
 using OrchardCore.Liquid;
 using YesSql;
 
@@ -23,10 +23,10 @@ namespace OrchardCore.SearchA.Liquid
         {
             context.MemberAccessStrategy.Register<LiquidContentAccessor, LiquidPropertyAccessor>("SearchA", obj =>
             {
-                return new LiquidPropertyAccessor(async SearchA =>
+                return new LiquidPropertyAccessor(async searchA =>
                 {
-                    var SearchAPartIndex = await _session.Query<ContentItem, SearchAPartIndex>(x => x.SearchA == SearchA.ToLowerInvariant()).FirstOrDefaultAsync();
-                    var contentItemId = SearchAPartIndex?.ContentItemId;
+                    var searchAPartIndex = await _session.Query<ContentItem, SearchAPartIndex>(x => x.SearchA == searchA.ToLowerInvariant()).FirstOrDefaultAsync();
+                    var contentItemId = searchAPartIndex?.ContentItemId;
 
                     if (contentItemId == null)
                     {

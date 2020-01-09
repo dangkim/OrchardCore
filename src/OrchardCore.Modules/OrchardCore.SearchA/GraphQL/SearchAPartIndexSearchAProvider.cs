@@ -1,24 +1,24 @@
 using System.Collections.Generic;
-using OrchardCore.SearchA.Indexes;
 using OrchardCore.ContentManagement.GraphQL.Queries;
+using OrchardCore.ContentManagement.Records;
 
 namespace OrchardCore.SearchA.GraphQL
 {
-    public class SearchAPartIndexSearchAProvider : IIndexSearchAProvider
+    public class SearchAPartIndexSearchAProvider : IIndexAliasProvider
     {
-        private static readonly IndexSearchA[] _SearchAes = new[]
+        private static readonly IndexAlias[] _aliases = new[]
         {
-            new IndexSearchA
+            new IndexAlias
             {
-                SearchA = "searchAPart",
-                Index = "SearchAPartIndex",
+                Alias = "searchAPart",
+                Index = nameof(SearchAPartIndex),
                 With = q => q.With<SearchAPartIndex>()
             }
         };
 
-        public IEnumerable<IndexSearchA> GetSearchAes()
+        public IEnumerable<IndexAlias> GetAliases()
         {
-            return _SearchAes;
+            return _aliases;
         }
     }
 }

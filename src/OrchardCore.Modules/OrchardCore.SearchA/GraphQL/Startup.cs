@@ -13,7 +13,7 @@ namespace OrchardCore.SearchA.GraphQL
         {
             services.AddObjectGraphType<SearchAPart, SearchAQueryObjectType>();
             services.AddInputObjectGraphType<SearchAPart, SearchAInputObjectType>();
-            services.AddTransient<IIndexSearchAProvider, SearchAPartIndexSearchAProvider>();
+            services.AddTransient<IIndexAliasProvider, SearchAPartIndexSearchAProvider>();
         }
     }
 }

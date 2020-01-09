@@ -1132,14 +1132,6 @@
       },
       "ContentPartFieldDefinitionRecords": []
     },
-	{
-      "Name": "SearchAPart",
-      "Settings": {
-        "Attachable": "True",
-        "Description": "Provides a search value for your content item."
-      },
-      "ContentPartFieldDefinitionRecords": []
-    },
     {
       "Name": "MenuPart",
       "Settings": {},

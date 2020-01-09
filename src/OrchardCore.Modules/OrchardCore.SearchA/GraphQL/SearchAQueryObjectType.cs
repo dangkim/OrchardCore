@@ -11,7 +11,7 @@ namespace OrchardCore.SearchA.GraphQL
             Name = "SearchAPart";
             Description = T["Alternative path for the content item"];
 
-            Field("SearchA", x => x.SearchA, true);
+            Field("searchA", x => x.SearchA, true);
         }
     }
 }

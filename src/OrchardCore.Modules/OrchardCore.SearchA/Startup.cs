@@ -2,7 +2,6 @@ using Fluid;
 using Microsoft.Extensions.DependencyInjection;
 using OrchardCore.SearchA.Drivers;
 using OrchardCore.SearchA.Handlers;
-using OrchardCore.SearchA.Indexes;
 using OrchardCore.SearchA.Indexing;
 using OrchardCore.SearchA.Liquid;
 using OrchardCore.SearchA.Models;
@@ -18,6 +17,7 @@ using OrchardCore.Indexing;
 using OrchardCore.Liquid;
 using OrchardCore.Modules;
 using YesSql.Indexes;
+using OrchardCore.ContentManagement.Records;
 
 namespace OrchardCore.SearchA
 {

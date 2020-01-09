@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Fluid;
-using OrchardCore.SearchA.Indexes;
 using OrchardCore.SearchA.Models;
 using OrchardCore.SearchA.Settings;
 using OrchardCore.ContentManagement;
@@ -12,6 +11,7 @@ using OrchardCore.Environment.Cache;
 using OrchardCore.Liquid;
 using OrchardCore.Settings;
 using YesSql;
+using OrchardCore.ContentManagement.Records;
 
 namespace OrchardCore.SearchA.Handlers
 {
@@ -93,16 +93,16 @@ namespace OrchardCore.SearchA.Handlers
 
         }
         
-        private async Task<string> GenerateUniqueSearchAAsync(string SearchA, SearchAPart context)
+        private async Task<string> GenerateUniqueSearchAAsync(string searchA, SearchAPart context)
         {
             var version = 1;
-            var unversionedSearchA = SearchA;
+            var unversionedSearchA = searchA;
 
-            var versionSeparatorPosition = SearchA.LastIndexOf('-');
+            var versionSeparatorPosition = searchA.LastIndexOf('-');
             if (versionSeparatorPosition > -1)
             {
-                int.TryParse(SearchA.Substring(versionSeparatorPosition).TrimStart('-'), out version);
-                unversionedSearchA = SearchA.Substring(0, versionSeparatorPosition);
+                int.TryParse(searchA.Substring(versionSeparatorPosition).TrimStart('-'), out version);
+                unversionedSearchA = searchA.Substring(0, versionSeparatorPosition);
             }
 
             while (true)

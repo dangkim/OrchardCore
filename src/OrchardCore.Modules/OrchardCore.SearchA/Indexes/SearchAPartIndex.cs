@@ -1,8 +1,7 @@
-using OrchardCore.ContentManagement;
 using OrchardCore.SearchA.Models;
 using YesSql.Indexes;
 
-namespace OrchardCore.SearchA.Indexes
+namespace OrchardCore.ContentManagement.Records
 {
     public class SearchAPartIndex : MapIndex
     {
@@ -22,16 +21,16 @@ namespace OrchardCore.SearchA.Indexes
                         return null;
                     }
 
-                    var SearchAPart = contentItem.As<SearchAPart>();
+                    var searchAPart = contentItem.As<SearchAPart>();
 
-                    if (SearchAPart?.SearchA == null)
+                    if (searchAPart?.SearchA == null)
                     {
                         return null;
                     }
 
                     return new SearchAPartIndex
                     {
-                        SearchA = SearchAPart.SearchA.ToLowerInvariant(),
+                        SearchA = searchAPart.SearchA.ToLowerInvariant(),
                         ContentItemId = contentItem.ContentItemId,
                     };
                 });

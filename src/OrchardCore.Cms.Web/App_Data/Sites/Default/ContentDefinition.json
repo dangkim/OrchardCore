@@ -2311,11 +2311,13 @@
       "Name": "SearchAPart",
       "Settings": {
         "Attachable": "True",
-        "Description": "Provides a SearchA for your content item.",
-        "DefaultPosition": "0"
+        "Description": "Provides a way to define custom SearchA for content items.",
+        "DefaultPosition": "0",
+        "Reusable": "False",
+        "DisplayName": null
       },
       "ContentPartFieldDefinitionRecords": []
     }
   ],
-  "Serial": 1289
+  "Serial": 1333
 }

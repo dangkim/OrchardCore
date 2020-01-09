@@ -2,13 +2,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using OrchardCore.ContentManagement.Display.ContentDisplay;
 using OrchardCore.ContentManagement.Metadata;
+using OrchardCore.ContentManagement.Records;
 using OrchardCore.DisplayManagement.ModelBinding;
 using OrchardCore.DisplayManagement.Views;
 using OrchardCore.SearchA.Models;
 using OrchardCore.SearchA.Settings;
 using OrchardCore.SearchA.ViewModels;
 using YesSql;
-using OrchardCore.SearchA.Indexes;
 using Microsoft.Extensions.Localization;
 using OrchardCore.Mvc.ModelBinding;
 
@@ -30,9 +30,9 @@ namespace OrchardCore.SearchA.Drivers
             T = localizer;
         }
 
-        public override IDisplayResult Edit(SearchAPart SearchAPart)
+        public override IDisplayResult Edit(SearchAPart searchAPart)
         {
-            return Initialize<SearchAPartViewModel>("SearchAPart_Edit", m => BuildViewModel(m, SearchAPart));
+            return Initialize<SearchAPartViewModel>("SearchAPart_Edit", m => BuildViewModel(m, searchAPart));
         }
 
         public override async Task<IDisplayResult> UpdateAsync(SearchAPart model, IUpdateModel updater)
@@ -64,11 +64,11 @@ namespace OrchardCore.SearchA.Drivers
             model.Settings = settings;
         }
 
-        private async Task ValidateAsync(SearchAPart SearchA, IUpdateModel updater)
+        private async Task ValidateAsync(SearchAPart searchA, IUpdateModel updater)
         {
-            if (SearchA.SearchA != null && (await _session.QueryIndex<SearchAPartIndex>(o => o.SearchA == SearchA.SearchA && o.ContentItemId != SearchA.ContentItem.ContentItemId).CountAsync()) > 0)
+            if (searchA.SearchA != null && (await _session.QueryIndex<SearchAPartIndex>(o => o.SearchA == searchA.SearchA && o.ContentItemId != searchA.ContentItem.ContentItemId).CountAsync()) > 0)
             {
-                updater.ModelState.AddModelError(Prefix, nameof(SearchA.SearchA), T["Your SearchA is already in use."]);
+                updater.ModelState.AddModelError(Prefix, nameof(searchA.SearchA), T["Your searchA is already in use."]);
             }
         }
     }

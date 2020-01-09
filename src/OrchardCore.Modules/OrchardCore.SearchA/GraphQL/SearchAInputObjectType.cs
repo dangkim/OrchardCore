@@ -12,7 +12,7 @@ namespace OrchardCore.SearchA.GraphQL
             Name = "SearchAPartInput";
             Description = T["the search value part of the content item"];
 
-            AddScalarFilterFields<StringGraphType>("SearchA", T["the search value of the content item"]);
+            AddScalarFilterFields<StringGraphType>("searchA", T["the search value of the content item"]);
         }
     }
 }
