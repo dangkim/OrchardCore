@@ -5,7 +5,7 @@
     <input asp-for="SearchB" class="form-control text-muted" />
     <span asp-validation-for="SearchB"></span>
     <span class="hint">
-        @T["The searchA of the content item."]
+        @T["The searchB of the content item."]
         @if (!String.IsNullOrWhiteSpace(Model.Settings.Pattern))
         {
             @T["Leave empty to re-generate it."]
