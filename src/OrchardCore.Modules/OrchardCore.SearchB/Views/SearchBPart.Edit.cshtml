@@ -1,0 +1,14 @@
+@model SearchBPartViewModel
+
+<div class="form-group" asp-validation-class-for="SearchB">
+    <label asp-for="SearchB">@T["SearchB"] </label>
+    <input asp-for="SearchB" class="form-control text-muted" />
+    <span asp-validation-for="SearchB"></span>
+    <span class="hint">
+        @T["The searchA of the content item."]
+        @if (!String.IsNullOrWhiteSpace(Model.Settings.Pattern))
+        {
+            @T["Leave empty to re-generate it."]
+        } 
+    </span>       
+</div>

@@ -788,13 +788,6 @@
           "Settings": {
             "Position": "0"
           }
-        },
-        {
-          "PartName": "SearchAPart",
-          "Name": "SearchAPart",
-          "Settings": {
-            "Position": "1"
-          }
         }
       ]
     },
@@ -814,7 +807,7 @@
           "PartName": "Influencer",
           "Name": "Influencer",
           "Settings": {
-            "Position": "1"
+            "Position": "2"
           }
         },
         {
@@ -828,21 +821,21 @@
           "PartName": "AgeDemorgraphic",
           "Name": "AgeDemorgraphic",
           "Settings": {
-            "Position": "2"
+            "Position": "3"
           }
         },
         {
           "PartName": "GenderDemorgraphic",
           "Name": "GenderDemorgraphic",
           "Settings": {
-            "Position": "3"
+            "Position": "4"
           }
         },
         {
           "PartName": "GeoDemorgraphic",
           "Name": "GeoDemorgraphic",
           "Settings": {
-            "Position": "4"
+            "Position": "5"
           }
         },
         {
@@ -851,7 +844,7 @@
           "Settings": {
             "DisplayName": "Post1",
             "Description": null,
-            "Position": "5"
+            "Position": "6"
           }
         },
         {
@@ -860,7 +853,7 @@
           "Settings": {
             "DisplayName": "Post2",
             "Description": null,
-            "Position": "6"
+            "Position": "7"
           }
         },
         {
@@ -869,7 +862,7 @@
           "Settings": {
             "DisplayName": "Post3",
             "Description": null,
-            "Position": "7"
+            "Position": "8"
           }
         },
         {
@@ -878,7 +871,7 @@
           "Settings": {
             "DisplayName": "Post4",
             "Description": null,
-            "Position": "8"
+            "Position": "9"
           }
         },
         {
@@ -887,7 +880,14 @@
           "Settings": {
             "DisplayName": "Post5",
             "Description": null,
-            "Position": "9"
+            "Position": "10"
+          }
+        },
+        {
+          "PartName": "SearchAPart",
+          "Name": "SearchAPart",
+          "Settings": {
+            "Position": "1"
           }
         }
       ]
@@ -2313,11 +2313,19 @@
         "Attachable": "True",
         "Description": "Provides a way to define custom SearchA for content items.",
         "DefaultPosition": "0",
-        "Reusable": "False",
+        "Reusable": "True",
         "DisplayName": null
+      },
+      "ContentPartFieldDefinitionRecords": []
+    },
+    {
+      "Name": "SearchBPart",
+      "Settings": {
+        "Attachable": "True",
+        "Description": "Provides a way to define custom SearchB for content items."
       },
       "ContentPartFieldDefinitionRecords": []
     }
   ],
-  "Serial": 1333
+  "Serial": 1354
 }

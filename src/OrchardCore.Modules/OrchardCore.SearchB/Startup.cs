@@ -1,32 +1,48 @@
 using Fluid;
 using Microsoft.Extensions.DependencyInjection;
+using OrchardCore.SearchB.Drivers;
+using OrchardCore.SearchB.Handlers;
+using OrchardCore.SearchB.Indexing;
+using OrchardCore.SearchB.Liquid;
+using OrchardCore.SearchB.Models;
+using OrchardCore.SearchB.Services;
+using OrchardCore.SearchB.Settings;
+using OrchardCore.SearchB.ViewModels;
 using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Display.ContentDisplay;
+using OrchardCore.ContentManagement.Handlers;
+using OrchardCore.ContentTypes.Editors;
 using OrchardCore.Data.Migration;
 using OrchardCore.Indexing;
+using OrchardCore.Liquid;
 using OrchardCore.Modules;
-using OrchardCore.Title.Drivers;
-using OrchardCore.Title.Indexing;
-using OrchardCore.Title.Model;
-using OrchardCore.Title.ViewModels;
+using YesSql.Indexes;
+using OrchardCore.ContentManagement.Records;
 
-namespace OrchardCore.Title
+namespace OrchardCore.SearchB
 {
     public class Startup : StartupBase
     {
         static Startup()
         {
-            TemplateContext.GlobalMemberAccessStrategy.Register<TitlePartViewModel>();
+            TemplateContext.GlobalMemberAccessStrategy.Register<SearchBPartViewModel>();
         }
 
         public override void ConfigureServices(IServiceCollection services)
         {
-            // Title Part
-            services.AddScoped<IContentPartDisplayDriver, TitlePartDisplay>();
-            services.AddSingleton<ContentPart, TitlePart>();
-            services.AddScoped<IContentPartIndexHandler, TitlePartIndexHandler>();
-
+            services.AddSingleton<IIndexProvider, SearchAPartIndexProvider>();
             services.AddScoped<IDataMigration, Migrations>();
+            services.AddScoped<IContentSearchAProvider, SearchBPartContentSearchBProvider>();
+
+            // Identity Part
+            services.AddScoped<IContentPartDisplayDriver, SearchBPartDisplayDriver>();
+            services.AddSingleton<ContentPart, SearchBPart>();
+            services.AddScoped<IContentPartHandler, SearchBPartHandler>();
+            services.AddScoped<IContentPartIndexHandler, SearchBPartIndexHandler>();
+            services.AddScoped<IContentTypePartDefinitionDisplayDriver, SearchBPartSettingsDisplayDriver>();
+
+
+            services.AddScoped<ILiquidTemplateEventHandler, ContentSearchBLiquidTemplateEventHandler>();
         }
     }
 }

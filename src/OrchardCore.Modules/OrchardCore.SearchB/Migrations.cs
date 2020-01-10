@@ -1,101 +1,36 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Metadata.Settings;
 using OrchardCore.ContentManagement.Metadata;
 using OrchardCore.ContentManagement.Records;
 using OrchardCore.Data.Migration;
-using Newtonsoft.Json.Linq;
-using YesSql;
-using Microsoft.Extensions.Logging;
+using OrchardCore.SearchB.Models;
 
-namespace OrchardCore.Title
+namespace OrchardCore.SearchB
 {
     public class Migrations : DataMigration
     {
         IContentDefinitionManager _contentDefinitionManager;
-        private readonly ISession _session;
-        private readonly ILogger<Migrations> _logger;
 
-        public Migrations(
-            IContentDefinitionManager contentDefinitionManager, 
-            ISession session,
-            ILogger<Migrations> logger)
+        public Migrations(IContentDefinitionManager contentDefinitionManager)
         {
             _contentDefinitionManager = contentDefinitionManager;
-            _session = session;
-            _logger = logger;
         }
 
         public int Create()
         {
-            _contentDefinitionManager.AlterPartDefinition("TitlePart", builder => builder
+            _contentDefinitionManager.AlterPartDefinition(nameof(SearchBPart), builder => builder
                 .Attachable()
-                .WithDescription("Provides a Title for your content item.")
-                .WithDefaultPosition("0")
-                );
+                .WithDescription("Provides a way to define custom SearchB for content items."));
 
-            return 2;
-        }
-        
-        public async Task<int> UpdateFrom1()
-        {
-            // This code can be removed in RC
-            // We are patching all content item versions by moving the Title to DisplayText
-            // This step doesn't need to be executed for a brand new site
+            SchemaBuilder.CreateMapIndexTable(nameof(SearchBPartIndex), table => table
+                .Column<string>("SearchB", col => col.WithLength(1024))
+                .Column<string>("ContentItemId", c => c.WithLength(26))
+            );
 
-            var lastDocumentId = 0;
+            SchemaBuilder.AlterTable(nameof(SearchBPartIndex), table => table
+                .CreateIndex("IDX_SearchBPartIndex_SearchB", "SearchB")
+            );
 
-            for(;;)
-            {
-                var contentItemVersions = await _session.Query<ContentItem, ContentItemIndex>(x => x.DocumentId > lastDocumentId).Take(10).ListAsync();
-                
-                if (!contentItemVersions.Any())
-                {
-                    // No more content item version to process
-                    break;
-                }
-
-                foreach(var contentItemVersion in contentItemVersions)
-                {
-                    if (String.IsNullOrEmpty(contentItemVersion.DisplayText)
-                        && UpdateTitle(contentItemVersion.Content))
-                    {
-                        _session.Save(contentItemVersion);
-                        _logger.LogInformation($"A content item version's Title was upgraded: '{contentItemVersion.ContentItemVersionId}'");
-                    }
-
-                    lastDocumentId = contentItemVersion.Id;
-                }
-
-                await _session.CommitAsync();
-            } 
-
-            bool UpdateTitle(JToken content)
-            {
-                var changed = false;
-
-                if (content.Type == JTokenType.Object)
-                {
-                    var title = content["TitlePart"] ? ["Title"]?.Value<string>();
-                    
-                    if (!String.IsNullOrWhiteSpace(title))
-                    {
-                        content["DisplayText"] = title;
-                        changed = true;
-                    }
-                }
-
-                foreach (var token in content)
-                {
-                    changed = UpdateTitle(token) || changed;
-                }
-
-                return changed;
-            }
-
-            return 2;
+            return 1;
         }
     }
 }

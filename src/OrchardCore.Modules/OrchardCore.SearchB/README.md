@@ -1,22 +1,23 @@
-# Title (`OrchardCore.Title`)
+# SearchA (`OrchardCore.SearchA`)
 
-The `Title` module provides a **Title Part** that lets user define a title for a content item.
-It also defines the `DisplayText` property of the `ContentItemMetadata` aspect.
+This module allows you to specify friendly identifiers for your content items. 
+Aliases can also be imported and exported, which means that they are persisted when running recipes or deploying content (whereas content item IDs are not).
 
-## Theming
+## SearchB Part
 
-The following shapes are rendered when the **Title Part** is attached to a content type.
+Attach this part to a content type to specify aliases for your content items.
 
-| Name | Display Type | Default Location | Model Type |
-| ------| ------------ |----------------- | ---------- |
-| `TitlePart` | `Detail` | `Header:5` | `TitlePartViewModel` |
-| `TitlePart` | `Summary` | `Header:10` | `TitlePartViewModel` |
+## Liquid
 
-### View Model
+With SearchA enabled, you can retrieve content by alias in your liquid views and templates:
 
-The following properties are available in the `TitlePartViewModel` class.
+```liquid
+{% assign my_content = Content["searchB:footer-widget"] %}
+```
 
-| Name | Type | Description |
-| -----| ---- |------------ |
-| `Title` | `string` | The title property of the part. |
-| `TitlePart` | `TitlePart` | The `TitlePart` instance. |
+or
+
+```liquid
+{% assign my_content = Content.SearchB["footer-widget"] %}
+```
+
