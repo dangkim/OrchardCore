@@ -294,6 +294,11 @@ namespace OrchardCore.Users.Controllers
 
             var model = new ResetPasswordViewModel { Email = user.Email };
 
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             return View(model);
         }
 
@@ -303,6 +308,11 @@ namespace OrchardCore.Users.Controllers
             if (!await _authorizationService.AuthorizeAsync(User, Permissions.ManageUsers))
             {
                 return Unauthorized();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
             }
 
             var user = await _userManager.FindByEmailAsync(model.Email) as User;

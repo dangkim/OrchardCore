@@ -14,6 +14,7 @@ namespace OrchardCore.Users.ViewModels
 
         [Required]
         [DataType(DataType.Password)]
+        [Compare("NewPassword", ErrorMessage = "Password and Confirm Password do not match")]
         public string PasswordConfirmation { get; set; }
 
         public string ResetToken { get; set; }

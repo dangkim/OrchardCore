@@ -130,6 +130,11 @@ namespace OrchardCore.Users.Controllers
                 return NotFound();
             }
 
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             await _passwordRecoveryFormEvents.InvokeAsync(i => i.ResettingPasswordAsync((key, message) => ModelState.AddModelError(key, message)), _logger);
 
             if (ModelState.IsValid)
