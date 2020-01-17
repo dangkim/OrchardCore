@@ -145,49 +145,6 @@ namespace OrchardCore.Content.Controllers
             return Ok(contentItem);
         }
 
-        [Route("{username}/{password}"), HttpGet]
-        [EnableCors("MyPolicy"), AllowAnonymous]
-        [ActionName("GetToken")]
-        public async Task<IActionResult> GetToken(string username, string password)
-        {
-            if (string.IsNullOrEmpty(username))
-            {
-                return StatusCode(204);
-            }
-            else
-            {
-                var url = "https://www.h3win.net/getPTToken.php?username=" + username + "&password=" + password;
-                var response = await GetAsync(url);
-
-                if (response.StatusCode != HttpStatusCode.OK)
-                {
-                    var ptModel = new PTModel
-                    {
-                        Errors = "Can not get Token from h3",
-                        Result = response.Content.ToString(),
-                        sts = 1
-                    };
-
-                    var json = JsonConvert.SerializeObject(ptModel);
-
-                    return Ok(json);
-                }
-                else
-                {
-                    var ptModel = new PTModel
-                    {
-                        Errors = "0",
-                        Result = response.Content.ToString(),
-                        sts = 0
-                    };
-
-                    var json = JsonConvert.SerializeObject(ptModel);
-
-                    return Ok(json);
-                }
-            }
-        }
-
         [HttpDelete]
         [Route("{contentItemId}")]
         public async Task<IActionResult> Delete(string contentItemId)
@@ -362,6 +319,8 @@ namespace OrchardCore.Content.Controllers
 
             dynamic jsonObj = contentItem.Content;
             jsonObj["Influencer"]["NumberOfFollowers"]["Value"] = followerAndPhotoModel.NumberOfFollowers;
+            jsonObj["Influencer"]["FollowerChart"]["Text"] = ";" + followerAndPhotoModel.NumberOfFollowers;
+            jsonObj["SearchAPart"]["SearchA"]["Text"] = followerAndPhotoModel.NumberOfFollowers;
 
             var photos = jsonObj["Influencer"]["Photo"]["Paths"];
 
@@ -414,6 +373,9 @@ namespace OrchardCore.Content.Controllers
             jsonObj["Influencer"]["NumberOfShare"]["Text"] = updatePostModel.NumberOfTotalShare;
             jsonObj["Influencer"]["NumberOfReaction"]["Text"] = updatePostModel.NumberOfTotalReaction;
             jsonObj["Influencer"]["NumberOfComment"]["Text"] = updatePostModel.NumberOfTotalComment;
+
+            // Engagement
+            jsonObj["SearchBPart"]["SearchB"]["Text"] = updatePostModel.NumberOfTotalReaction + (Int32.Parse(updatePostModel.NumberOfTotalComment) * 2) + (Int32.Parse(updatePostModel.NumberOfTotalShare) * 3);
 
             var indx = 0;
 
@@ -714,51 +676,5 @@ namespace OrchardCore.Content.Controllers
 
             return new { files = result };
         }
-
-
-        //[HttpPost]
-        //[ActionName("ChangePassword")]
-        //[EnableCors("MyPolicy")]
-        //public async Task<IActionResult> ChangePassword(ChangePasswordModel changePasswordModel)
-        //{
-        //    var contentItem = await _contentManager.GetAsync(changePasswordModel.ContentItemId, VersionOptions.DraftRequired);
-
-        //    if (contentItem == null)
-        //    {
-        //        return StatusCode(204);
-        //    }
-        //    else
-        //    {
-        //        if (!await _authorizationService.AuthorizeAsync(User, Permissions.EditOwnContent, contentItem))
-        //        {
-        //            return Unauthorized();
-        //        }
-        //    }
-
-        //    dynamic jsonObj = contentItem.Content;
-
-        //    if (jsonObj["Brand"]["Email"]["Text"] != changePasswordModel.Email)
-        //    {
-        //        return Unauthorized();
-        //    }
-        //    else
-        //    {
-        //        var user = await _userManager.FindByEmailAsync(model.Email) as User;
-
-        //        if (user == null)
-        //        {
-        //            return NotFound();
-        //        }
-
-        //        var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-
-        //        if (await _userService.ResetPasswordAsync(model.Email, token, model.NewPassword, ModelState.AddModelError))
-        //        {
-        //            _notifier.Success(TH["Password updated correctly."]);
-
-        //            return RedirectToAction(nameof(Index));
-        //        }
-        //    }
-        //}
     }
 }
