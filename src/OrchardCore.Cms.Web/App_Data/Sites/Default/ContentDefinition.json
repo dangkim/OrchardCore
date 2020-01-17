@@ -779,7 +779,7 @@
           "PartName": "Brand",
           "Name": "Brand",
           "Settings": {
-            "Position": "1"
+            "Position": "4"
           }
         },
         {
@@ -790,10 +790,24 @@
           }
         },
         {
-          "PartName": "AliasPart",
-          "Name": "AliasPart",
+          "PartName": "ValueForSortingOnePart",
+          "Name": "ValueForSortingOnePart",
+          "Settings": {
+            "Position": "1"
+          }
+        },
+        {
+          "PartName": "ValueForSortingThreePart",
+          "Name": "ValueForSortingThreePart",
           "Settings": {
             "Position": "2"
+          }
+        },
+        {
+          "PartName": "ValueForSortingTwoPart",
+          "Name": "ValueForSortingTwoPart",
+          "Settings": {
+            "Position": "3"
           }
         }
       ]
@@ -2339,7 +2353,34 @@
         "Description": "Provides a way to define custom SearchB for content items."
       },
       "ContentPartFieldDefinitionRecords": []
+    },
+    {
+      "Name": "ValueForSortingThreePart",
+      "Settings": {
+        "Attachable": "True",
+        "Description": "Provides a ValueForSorting for your content item.",
+        "DefaultPosition": "0"
+      },
+      "ContentPartFieldDefinitionRecords": []
+    },
+    {
+      "Name": "ValueForSortingTwoPart",
+      "Settings": {
+        "Attachable": "True",
+        "Description": "Provides a Value For Sorting for your content item.",
+        "DefaultPosition": "0"
+      },
+      "ContentPartFieldDefinitionRecords": []
+    },
+    {
+      "Name": "ValueForSortingOnePart",
+      "Settings": {
+        "Attachable": "True",
+        "Description": "Provides a Value For Sorting for your content item.",
+        "DefaultPosition": "0"
+      },
+      "ContentPartFieldDefinitionRecords": []
     }
   ],
-  "Serial": 1386
+  "Serial": 1407
 }

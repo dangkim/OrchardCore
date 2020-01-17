@@ -23,6 +23,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\OrchardCore.Modules\OrchardCore.SearchA\OrchardCore.SearchA.csproj" />
     <ProjectReference Include="..\..\OrchardCore.Modules\OrchardCore.SearchB\OrchardCore.SearchB.csproj" />
+    <ProjectReference Include="..\..\OrchardCore.Modules\OrchardCore.ValueForSortingOne\OrchardCore.ValueForSortingOne.csproj" />
+    <ProjectReference Include="..\..\OrchardCore.Modules\OrchardCore.ValueForSortingThree\OrchardCore.ValueForSearchingThree.csproj" />
+    <ProjectReference Include="..\..\OrchardCore.Modules\OrchardCore.ValueForSortingTwo\OrchardCore.ValueForSearchingTwo.csproj" />
     <ProjectReference Include="..\OrchardCore.Application.Targets\OrchardCore.Application.Targets.csproj" PrivateAssets="none" />
 
     <!-- 

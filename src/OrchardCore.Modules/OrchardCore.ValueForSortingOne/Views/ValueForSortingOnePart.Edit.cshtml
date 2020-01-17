@@ -1,0 +1,9 @@
+@using OrchardCore.ValueForSortingOne.ViewModels;
+@model ValueForSortingOnePartViewModel
+
+<fieldset class="form-group" asp-validation-class-for="ValueForSortingOne">
+    <label asp-for="ValueForSortingOne">@T["ValueForSortingOne"]</label>
+    <input asp-for="ValueForSortingOne" class="form-control content-preview-text content-caption-text" autofocus="autofocus" />
+    <span asp-validation-for="ValueForSortingOne"></span>
+    <span class="hint">@T["The ValueForSorting of the content item."]</span>
+</fieldset>

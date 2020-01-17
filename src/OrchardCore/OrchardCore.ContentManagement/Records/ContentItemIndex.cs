@@ -10,7 +10,7 @@ namespace OrchardCore.ContentManagement.Records
         public const int MaxAuthorSize = 255;
         public const int MaxDisplayTextSize = 255;
 
-        public const int MaxValueForSearching = 25;
+        public const int MaxValueForSorting = 25;
 
         public int DocumentId { get; set; }
         public string ContentItemId { get; set; }
