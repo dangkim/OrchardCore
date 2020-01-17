@@ -75,6 +75,21 @@ namespace OrchardCore.ContentManagement
         /// </summary>
         public string DisplayText { get; set; }
 
+        /// <summary>
+        /// The text of sorting this content item.
+        /// </summary>
+        public string ValueForSortingOne { get; set; }
+
+        /// <summary>
+        /// The text of sorting this content item.
+        /// </summary>
+        public string ValueForSortingTwo { get; set; }
+
+        /// <summary>
+        /// The text of sorting this content item.
+        /// </summary>
+        public string ValueForSortingThree { get; set; }
+
         public override string ToString()
         {
             return string.IsNullOrWhiteSpace(DisplayText) ? $"{ContentType} ({ContentItemId})" : DisplayText;

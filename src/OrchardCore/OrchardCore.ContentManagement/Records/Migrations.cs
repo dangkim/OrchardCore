@@ -19,6 +19,9 @@ namespace OrchardCore.ContentManagement.Records
                 .Column<string>("Owner", column => column.Nullable().WithLength(ContentItemIndex.MaxOwnerSize))
                 .Column<string>("Author", column => column.Nullable().WithLength(ContentItemIndex.MaxAuthorSize))
                 .Column<string>("DisplayText", column => column.Nullable().WithLength(ContentItemIndex.MaxDisplayTextSize))
+                //.Column<string>("ValueForSortingOne", column => column.Nullable().WithLength(ContentItemIndex.MaxValueForSearching))
+                //.Column<string>("ValueForSortingTwo", column => column.Nullable().WithLength(ContentItemIndex.MaxValueForSearching))
+                //.Column<string>("ValueForSortingThree", column => column.Nullable().WithLength(ContentItemIndex.MaxValueForSearching))
             );
 
             SchemaBuilder.AlterTable(nameof(ContentItemIndex), table => table
@@ -51,12 +54,28 @@ namespace OrchardCore.ContentManagement.Records
 
         public int UpdateFrom2()
         {
+            //SchemaBuilder.AlterTable(nameof(ContentItemIndex), table => table
+            //    .AddColumn<string>("DisplayText", column => column.Nullable().WithLength(ContentItemIndex.MaxDisplayTextSize))
+            //);
+
             SchemaBuilder.AlterTable(nameof(ContentItemIndex), table => table
-                .AddColumn<string>("DisplayText", column => column.Nullable().WithLength(ContentItemIndex.MaxDisplayTextSize))
+                .AddColumn<string>("ValueForSortingOne", column => column.Nullable().WithLength(ContentItemIndex.MaxValueForSearching))
             );
 
             SchemaBuilder.AlterTable(nameof(ContentItemIndex), table => table
-                .CreateIndex("IDX_ContentItemIndex_DisplayText", "DisplayText")
+                .AddColumn<string>("ValueForSortingTwo", column => column.Nullable().WithLength(ContentItemIndex.MaxValueForSearching))
+            );
+
+            SchemaBuilder.AlterTable(nameof(ContentItemIndex), table => table
+                .AddColumn<string>("ValueForSortingThree", column => column.Nullable().WithLength(ContentItemIndex.MaxValueForSearching))
+            );
+            
+            //SchemaBuilder.AlterTable(nameof(ContentItemIndex), table => table
+            //    .CreateIndex("IDX_ContentItemIndex_DisplayText", "DisplayText")
+            //);
+
+            SchemaBuilder.AlterTable(nameof(ContentItemIndex), table => table
+                .CreateIndex("IDX_ContentItemIndex_ValueForSorting", "ValueForSortingOne", "ValueForSortingTwo", "ValueForSortingThree")
             );
 
             return 3;

@@ -10,6 +10,8 @@ namespace OrchardCore.ContentManagement.Records
         public const int MaxAuthorSize = 255;
         public const int MaxDisplayTextSize = 255;
 
+        public const int MaxValueForSearching = 25;
+
         public int DocumentId { get; set; }
         public string ContentItemId { get; set; }
         public string ContentItemVersionId { get; set; }
@@ -22,6 +24,9 @@ namespace OrchardCore.ContentManagement.Records
         public string Owner { get; set; }
         public string Author { get; set; }
         public string DisplayText { get; set; }
+        public string ValueForSortingOne { get; set; }
+        public string ValueForSortingTwo { get; set; }
+        public string ValueForSortingThree { get; set; }
     }
 
     public class ContentItemIndexProvider : IndexProvider<ContentItem>
@@ -42,7 +47,10 @@ namespace OrchardCore.ContentManagement.Records
                         CreatedUtc = contentItem.CreatedUtc,
                         Owner = contentItem.Owner,
                         Author = contentItem.Author,
-                        DisplayText = contentItem.DisplayText
+                        DisplayText = contentItem.DisplayText,
+                        ValueForSortingOne = contentItem.ValueForSortingOne,
+                        ValueForSortingTwo = contentItem.ValueForSortingTwo,
+                        ValueForSortingThree = contentItem.ValueForSortingThree
                     };
 
                     if (contentItemIndex.ContentType?.Length > ContentItemIndex.MaxContentTypeSize)
