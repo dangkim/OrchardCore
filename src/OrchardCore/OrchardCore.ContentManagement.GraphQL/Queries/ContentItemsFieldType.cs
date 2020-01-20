@@ -365,6 +365,7 @@ namespace OrchardCore.ContentManagement.GraphQL.Queries
                             case "contentItemId": selector = x => x.ContentItemId; break;
                             case "contentItemVersionId": selector = x => x.ContentItemVersionId; break;
                             case "displayText": selector = x => x.DisplayText; break;
+                            case "valueForSortingOne": selector = x => x.ValueForSortingOne; break;
                             case "published": selector = x => x.Published; break;
                             case "latest": selector = x => x.Latest; break;
                             case "createdUtc": selector = x => x.CreatedUtc; break;

@@ -12,6 +12,7 @@ namespace OrchardCore.ContentManagement.GraphQL.Queries.Types
             Field<OrderByDirectionGraphType>("contentItemVersionId");
             Field<OrderByDirectionGraphType>("contentType");
             Field<OrderByDirectionGraphType>("displayText");
+            Field<OrderByDirectionGraphType>("valueForSortingOne");
             Field<OrderByDirectionGraphType>("published");
             Field<OrderByDirectionGraphType>("latest");
             Field<OrderByDirectionGraphType>("createdUtc");

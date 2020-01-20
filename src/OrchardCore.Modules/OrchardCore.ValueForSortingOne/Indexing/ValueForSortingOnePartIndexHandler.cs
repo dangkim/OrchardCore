@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using OrchardCore.Indexing;
-using OrchardCore.ValueForSortingOne.Model;
+using OrchardCore.ValueForSortingOne.Models;
 
 namespace OrchardCore.ValueForSortingOne.Indexing
 {

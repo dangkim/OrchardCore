@@ -5,8 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="GraphQL\**" />
+    <Compile Remove="Indexes\**" />
     <Compile Remove="RemotePublishing\**" />
+    <EmbeddedResource Remove="GraphQL\**" />
+    <EmbeddedResource Remove="Indexes\**" />
     <EmbeddedResource Remove="RemotePublishing\**" />
+    <None Remove="GraphQL\**" />
+    <None Remove="Indexes\**" />
     <None Remove="RemotePublishing\**" />
   </ItemGroup>
 

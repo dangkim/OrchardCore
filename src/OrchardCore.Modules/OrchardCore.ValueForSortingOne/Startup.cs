@@ -7,7 +7,7 @@ using OrchardCore.Indexing;
 using OrchardCore.Modules;
 using OrchardCore.ValueForSortingOne.Drivers;
 using OrchardCore.ValueForSortingOne.Indexing;
-using OrchardCore.ValueForSortingOne.Model;
+using OrchardCore.ValueForSortingOne.Models;
 using OrchardCore.ValueForSortingOne.ViewModels;
 
 namespace OrchardCore.ValueForSortingOne

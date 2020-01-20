@@ -1,7 +1,7 @@
 using OrchardCore.ContentManagement;
 using System.ComponentModel.DataAnnotations;
 
-namespace OrchardCore.ValueForSortingOne.Model
+namespace OrchardCore.ValueForSortingOne.Models
 {
     public class ValueForSortingOnePart : ContentPart
     {

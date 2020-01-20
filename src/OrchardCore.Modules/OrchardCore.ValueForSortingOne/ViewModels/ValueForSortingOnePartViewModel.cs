@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using OrchardCore.ValueForSortingOne.Model;
+using OrchardCore.ValueForSortingOne.Models;
 
 namespace OrchardCore.ValueForSortingOne.ViewModels
 {

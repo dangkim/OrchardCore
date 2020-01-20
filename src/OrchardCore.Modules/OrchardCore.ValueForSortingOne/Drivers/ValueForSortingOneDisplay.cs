@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using OrchardCore.ContentManagement.Display.ContentDisplay;
 using OrchardCore.DisplayManagement.ModelBinding;
 using OrchardCore.DisplayManagement.Views;
-using OrchardCore.ValueForSortingOne.Model;
+using OrchardCore.ValueForSortingOne.Models;
 using OrchardCore.ValueForSortingOne.ViewModels;
 
 namespace OrchardCore.ValueForSortingOne.Drivers

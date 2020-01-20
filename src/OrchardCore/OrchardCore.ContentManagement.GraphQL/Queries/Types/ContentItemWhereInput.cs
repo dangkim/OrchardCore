@@ -23,6 +23,7 @@ namespace OrchardCore.ContentManagement.GraphQL.Queries.Types
             AddScalarFilterFields<DateTimeGraphType>("publishedUtc", "the date and time of publication");
             AddScalarFilterFields<StringGraphType>("owner", "the owner of the content item");
             AddScalarFilterFields<StringGraphType>("author", "the author of the content item");
+            AddScalarFilterFields<StringGraphType>("valueForSortingOne", "the author of the content item");
 
             var whereInputType = new ListGraphType(this);
             Field<ListGraphType<ContentItemWhereInput>>("Or", "OR logical operation").ResolvedType = whereInputType;

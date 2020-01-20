@@ -18,6 +18,7 @@ namespace OrchardCore.ContentManagement.GraphQL.Queries.Types
             Field(ci => ci.ContentItemVersionId);
             Field(ci => ci.ContentType);
             Field(ci => ci.DisplayText);
+            Field(ci => ci.ValueForSortingOne);
             Field(ci => ci.Published);
             Field(ci => ci.Latest);
             Field<DateTimeGraphType>("modifiedUtc", resolve: ci => ci.Source.ModifiedUtc);
