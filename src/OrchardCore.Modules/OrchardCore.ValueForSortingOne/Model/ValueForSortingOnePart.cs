@@ -5,7 +5,7 @@ namespace OrchardCore.ValueForSortingOne.Models
 {
     public class ValueForSortingOnePart : ContentPart
     {
-        //[Required]
+        [Required]
         public string ValueForSortingOne { get; set; }
     }
 }

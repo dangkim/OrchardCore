@@ -26,6 +26,8 @@ namespace OrchardCore.ContentManagement.GraphQL.Queries.Types
             Field(ci => ci.ContentType).Description("Type of content");
             Field(ci => ci.DisplayText).Description("The display text of the content item");
             Field(ci => ci.ValueForSortingOne).Description("The Value For Sorting text of the content item");
+            Field(ci => ci.ValueForSortingTwo).Description("The Value For Sorting text of the content item");
+            Field(ci => ci.ValueForSortingThree).Description("The Value For Sorting text of the content item");
             Field(ci => ci.Published).Description("Is the published version");
             Field(ci => ci.Latest).Description("Is the latest version");
             Field<DateTimeGraphType>("modifiedUtc", resolve: ci => ci.Source.ModifiedUtc, description: "The date and time of modification");

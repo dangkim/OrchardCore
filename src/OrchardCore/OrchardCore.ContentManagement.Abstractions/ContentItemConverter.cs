@@ -16,6 +16,9 @@ namespace OrchardCore.ContentManagement
             o.Add(new JProperty(nameof(ContentItem.ContentItemVersionId), contentItem.ContentItemVersionId));
             o.Add(new JProperty(nameof(ContentItem.ContentType), contentItem.ContentType));
             o.Add(new JProperty(nameof(ContentItem.DisplayText), contentItem.DisplayText));
+            o.Add(new JProperty(nameof(ContentItem.ValueForSortingOne), contentItem.ValueForSortingOne));
+            o.Add(new JProperty(nameof(ContentItem.ValueForSortingTwo), contentItem.ValueForSortingTwo));
+            o.Add(new JProperty(nameof(ContentItem.ValueForSortingThree), contentItem.ValueForSortingThree));
             o.Add(new JProperty(nameof(ContentItem.Latest), contentItem.Latest));
             o.Add(new JProperty(nameof(ContentItem.Published), contentItem.Published));
             o.Add(new JProperty(nameof(ContentItem.ModifiedUtc), contentItem.ModifiedUtc));
@@ -64,6 +67,15 @@ namespace OrchardCore.ContentManagement
                         break;
                     case nameof(ContentItem.DisplayText):
                         contentItem.DisplayText = reader.ReadAsString();
+                        break;
+                    case nameof(ContentItem.ValueForSortingOne):
+                        contentItem.ValueForSortingOne = reader.ReadAsString();
+                        break;
+                    case nameof(ContentItem.ValueForSortingTwo):
+                        contentItem.ValueForSortingTwo = reader.ReadAsString();
+                        break;
+                    case nameof(ContentItem.ValueForSortingThree):
+                        contentItem.ValueForSortingThree = reader.ReadAsString();
                         break;
                     case nameof(ContentItem.Latest):
                         contentItem.Latest = reader.ReadAsBoolean() ?? false;
