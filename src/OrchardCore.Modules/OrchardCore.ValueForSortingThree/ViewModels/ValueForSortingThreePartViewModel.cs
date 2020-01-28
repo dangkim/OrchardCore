@@ -5,7 +5,7 @@ namespace OrchardCore.ValueForSortingThree.ViewModels
 {
     public class ValueForSortingThreePartViewModel
     {
-        public string ValueForSortingThree { get; set; }
+        public int? ValueForSortingThree { get; set; }
 
         [BindNever]
         public ValueForSortingThreePart ValueForSortingThreePart { get; set; }

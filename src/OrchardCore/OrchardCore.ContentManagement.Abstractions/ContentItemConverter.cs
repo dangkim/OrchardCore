@@ -69,13 +69,13 @@ namespace OrchardCore.ContentManagement
                         contentItem.DisplayText = reader.ReadAsString();
                         break;
                     case nameof(ContentItem.ValueForSortingOne):
-                        contentItem.ValueForSortingOne = reader.ReadAsString();
+                        contentItem.ValueForSortingOne = reader.ReadAsInt32() ?? 0;
                         break;
                     case nameof(ContentItem.ValueForSortingTwo):
-                        contentItem.ValueForSortingTwo = reader.ReadAsString();
+                        contentItem.ValueForSortingTwo = reader.ReadAsInt32() ?? 0;
                         break;
                     case nameof(ContentItem.ValueForSortingThree):
-                        contentItem.ValueForSortingThree = reader.ReadAsString();
+                        contentItem.ValueForSortingThree = reader.ReadAsInt32() ?? 0;
                         break;
                     case nameof(ContentItem.Latest):
                         contentItem.Latest = reader.ReadAsBoolean() ?? false;
@@ -107,7 +107,7 @@ namespace OrchardCore.ContentManagement
                         break;
                 }
             }
-            
+
             return contentItem;
         }
 
@@ -116,5 +116,5 @@ namespace OrchardCore.ContentManagement
             return objectType == typeof(ContentItem);
         }
     }
-   
+
 }

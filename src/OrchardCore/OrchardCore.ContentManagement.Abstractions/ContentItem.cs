@@ -78,17 +78,17 @@ namespace OrchardCore.ContentManagement
         /// <summary>
         /// The text of sorting this content item.
         /// </summary>
-        public string ValueForSortingOne { get; set; }
+        public int ValueForSortingOne { get; set; }
 
         /// <summary>
         /// The text of sorting this content item.
         /// </summary>
-        public string ValueForSortingTwo { get; set; }
+        public int ValueForSortingTwo { get; set; }
 
         /// <summary>
         /// The text of sorting this content item.
         /// </summary>
-        public string ValueForSortingThree { get; set; }
+        public int ValueForSortingThree { get; set; }
 
         public override string ToString()
         {

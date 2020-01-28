@@ -24,9 +24,9 @@ namespace OrchardCore.ContentManagement.Records
         public string Owner { get; set; }
         public string Author { get; set; }
         public string DisplayText { get; set; }
-        public string ValueForSortingOne { get; set; }
-        public string ValueForSortingTwo { get; set; }
-        public string ValueForSortingThree { get; set; }
+        public int? ValueForSortingOne { get; set; }
+        public int? ValueForSortingTwo { get; set; }
+        public int? ValueForSortingThree { get; set; }
     }
 
     public class ContentItemIndexProvider : IndexProvider<ContentItem>
