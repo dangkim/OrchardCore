@@ -317,10 +317,18 @@ namespace OrchardCore.Content.Controllers
                 }
             }
 
+            char[] charsToTrim = { ';' };
+
             dynamic jsonObj = contentItem.Content;
+
+            string followerChart = Convert.ToString(jsonObj["Influencer"]["FollowerChart"]["Text"]);
+            string chartDate = Convert.ToString(jsonObj["Influencer"]["ChartCategoryDate"]["Text"]);
+            followerChart = followerChart + ";" +  followerAndPhotoModel.NumberOfFollowers;
+            chartDate = chartDate + ";" + followerAndPhotoModel.ChartDate;
+
             jsonObj["Influencer"]["NumberOfFollowers"]["Value"] = followerAndPhotoModel.NumberOfFollowers;
-            jsonObj["Influencer"]["FollowerChart"]["Text"] = ";" + followerAndPhotoModel.NumberOfFollowers;
-            jsonObj["SearchAPart"]["SearchA"]["Text"] = followerAndPhotoModel.NumberOfFollowers;
+            jsonObj["Influencer"]["FollowerChart"]["Text"] = followerChart.Trim(charsToTrim);
+            jsonObj["Influencer"]["ChartCategoryDate"]["Text"] = chartDate.Trim(charsToTrim);
 
             var photos = jsonObj["Influencer"]["Photo"]["Paths"];
 
@@ -329,9 +337,9 @@ namespace OrchardCore.Content.Controllers
                 photos.Add(item);
             }
 
-            //jsonObj["Influencer"]["Photo"]["Paths"] = followerAndPhotoModel.PhotoPaths;
             contentItem.ModifiedUtc = DateTime.Now;
             contentItem.Latest = true;
+            contentItem.ValueForSortingOne = followerAndPhotoModel.NumberOfFollowers;
 
             await _contentManager.UpdateAsync(contentItem);
 
@@ -375,7 +383,7 @@ namespace OrchardCore.Content.Controllers
             jsonObj["Influencer"]["NumberOfComment"]["Text"] = updatePostModel.NumberOfTotalComment;
 
             // Engagement
-            jsonObj["SearchBPart"]["SearchB"]["Text"] = updatePostModel.NumberOfTotalReaction + (Int32.Parse(updatePostModel.NumberOfTotalComment) * 2) + (Int32.Parse(updatePostModel.NumberOfTotalShare) * 3);
+            //jsonObj["SearchBPart"]["SearchB"]["Text"] = updatePostModel.NumberOfTotalReaction + (Int32.Parse(updatePostModel.NumberOfTotalComment) * 2) + (Int32.Parse(updatePostModel.NumberOfTotalShare) * 3);
 
             var indx = 0;
 
@@ -402,6 +410,7 @@ namespace OrchardCore.Content.Controllers
 
             contentItem.ModifiedUtc = DateTime.Now;
             contentItem.Latest = true;
+            contentItem.ValueForSortingTwo = Int32.Parse(updatePostModel.NumberOfTotalReaction) + (Int32.Parse(updatePostModel.NumberOfTotalComment) * 2) + (Int32.Parse(updatePostModel.NumberOfTotalShare) * 3);
 
             await _contentManager.UpdateAsync(contentItem);
 

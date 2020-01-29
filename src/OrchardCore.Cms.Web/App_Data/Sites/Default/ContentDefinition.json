@@ -1692,7 +1692,7 @@
           "Name": "Photo",
           "Settings": {
             "DisplayName": "Photo",
-            "Position": "17"
+            "Position": "18"
           }
         },
         {
@@ -1704,7 +1704,7 @@
             "Required": false,
             "Editor": "Url",
             "DisplayMode": null,
-            "Position": "15"
+            "Position": "16"
           }
         },
         {
@@ -1712,7 +1712,7 @@
           "Name": "Email",
           "Settings": {
             "DisplayName": "Email",
-            "Position": "16"
+            "Position": "17"
           }
         },
         {
@@ -1720,7 +1720,7 @@
           "Name": "FullName",
           "Settings": {
             "DisplayName": "Full Name",
-            "Position": "14"
+            "Position": "15"
           }
         },
         {
@@ -1728,7 +1728,7 @@
           "Name": "ShareLink",
           "Settings": {
             "DisplayName": "Share Link",
-            "Position": "9"
+            "Position": "10"
           }
         },
         {
@@ -1736,7 +1736,7 @@
           "Name": "PostImage",
           "Settings": {
             "DisplayName": "Post Image",
-            "Position": "10"
+            "Position": "11"
           }
         },
         {
@@ -1744,7 +1744,7 @@
           "Name": "LiveStream",
           "Settings": {
             "DisplayName": "Live Stream",
-            "Position": "11"
+            "Position": "12"
           }
         },
         {
@@ -1752,7 +1752,7 @@
           "Name": "CheckIn",
           "Settings": {
             "DisplayName": "Check In",
-            "Position": "12"
+            "Position": "13"
           }
         },
         {
@@ -1760,7 +1760,7 @@
           "Name": "Video",
           "Settings": {
             "DisplayName": "Video",
-            "Position": "13"
+            "Position": "14"
           }
         },
         {
@@ -1768,7 +1768,7 @@
           "Name": "Phone",
           "Settings": {
             "DisplayName": "Phone",
-            "Position": "8"
+            "Position": "9"
           }
         },
         {
@@ -1776,7 +1776,7 @@
           "Name": "NumberOfComment",
           "Settings": {
             "DisplayName": "NumberOfComment",
-            "Position": "7"
+            "Position": "8"
           }
         },
         {
@@ -1784,7 +1784,7 @@
           "Name": "NumberOfShare",
           "Settings": {
             "DisplayName": "NumberOfShare",
-            "Position": "5"
+            "Position": "6"
           }
         },
         {
@@ -1792,7 +1792,7 @@
           "Name": "NumberOfReaction",
           "Settings": {
             "DisplayName": "NumberOfReaction",
-            "Position": "6"
+            "Position": "7"
           }
         },
         {
@@ -1800,7 +1800,7 @@
           "Name": "VideoLink",
           "Settings": {
             "DisplayName": "VideoLink",
-            "Position": "4"
+            "Position": "5"
           }
         },
         {
@@ -1808,7 +1808,7 @@
           "Name": "NumberOfPost",
           "Settings": {
             "DisplayName": "NumberOfPost",
-            "Position": "3"
+            "Position": "4"
           }
         },
         {
@@ -1816,7 +1816,7 @@
           "Name": "NumberOfFollowers",
           "Settings": {
             "DisplayName": "NumberOfFollowers",
-            "Position": "2"
+            "Position": "3"
           }
         },
         {
@@ -1824,6 +1824,14 @@
           "Name": "FollowerChart",
           "Settings": {
             "DisplayName": "FollowerChart",
+            "Position": "2"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "ChartCategoryDate",
+          "Settings": {
+            "DisplayName": "ChartCategoryDate",
             "Position": "1"
           }
         }
@@ -2382,5 +2390,5 @@
       "ContentPartFieldDefinitionRecords": []
     }
   ],
-  "Serial": 1407
+  "Serial": 1415
 }
