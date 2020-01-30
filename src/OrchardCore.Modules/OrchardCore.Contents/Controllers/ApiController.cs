@@ -499,9 +499,9 @@ namespace OrchardCore.Content.Controllers
                 }
             }
 
-            //dynamic jsonObj = contentItem.Content;
-            //jsonObj["TitlePart"]["Title"] = displayModel.DisplayText;
-
+            dynamic jsonObj = contentItem.Content;
+            jsonObj["GenderDemorgraphic"]["GenderGraphicName"]["Text"] = displayModel.Gender;
+            jsonObj["Influencer"]["Description"]["Text"] = displayModel.Description;
 
             contentItem.DisplayText = displayModel.DisplayText;
             contentItem.ModifiedUtc = DateTime.Now;
