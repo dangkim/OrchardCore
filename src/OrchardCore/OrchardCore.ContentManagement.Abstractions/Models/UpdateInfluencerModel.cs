@@ -69,6 +69,7 @@ namespace OrchardCore.ContentManagement.Models
         public string DisplayText { get; set; }
         public string Description { get; set; }
         public string Gender { get; set; }
+        public string Location { get; set; }
     }
 
     public class ChangePasswordModel

@@ -501,7 +501,9 @@ namespace OrchardCore.Content.Controllers
 
             dynamic jsonObj = contentItem.Content;
             jsonObj["GenderDemorgraphic"]["GenderGraphicName"]["Text"] = displayModel.Gender;
+            jsonObj["GeoDemorgraphic"]["GeoGraphicName"]["Text"] = displayModel.Location;
             jsonObj["Influencer"]["Description"]["Text"] = displayModel.Description;
+            jsonObj["SearchAPart"]["SearchA"] = displayModel.Gender + ";" + displayModel.Location;
 
             contentItem.DisplayText = displayModel.DisplayText;
             contentItem.ModifiedUtc = DateTime.Now;
