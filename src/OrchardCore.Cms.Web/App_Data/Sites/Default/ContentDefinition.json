@@ -779,7 +779,7 @@
           "PartName": "Brand",
           "Name": "Brand",
           "Settings": {
-            "Position": "4"
+            "Position": "2"
           }
         },
         {
@@ -790,24 +790,10 @@
           }
         },
         {
-          "PartName": "ValueForSortingOnePart",
-          "Name": "ValueForSortingOnePart",
-          "Settings": {
-            "Position": "1"
-          }
-        },
-        {
           "PartName": "ValueForSortingThreePart",
           "Name": "ValueForSortingThreePart",
           "Settings": {
-            "Position": "2"
-          }
-        },
-        {
-          "PartName": "ValueForSortingTwoPart",
-          "Name": "ValueForSortingTwoPart",
-          "Settings": {
-            "Position": "3"
+            "Position": "1"
           }
         }
       ]
@@ -828,7 +814,7 @@
           "PartName": "Influencer",
           "Name": "Influencer",
           "Settings": {
-            "Position": "2"
+            "Position": "4"
           }
         },
         {
@@ -842,21 +828,21 @@
           "PartName": "AgeDemorgraphic",
           "Name": "AgeDemorgraphic",
           "Settings": {
-            "Position": "3"
+            "Position": "5"
           }
         },
         {
           "PartName": "GenderDemorgraphic",
           "Name": "GenderDemorgraphic",
           "Settings": {
-            "Position": "4"
+            "Position": "6"
           }
         },
         {
           "PartName": "GeoDemorgraphic",
           "Name": "GeoDemorgraphic",
           "Settings": {
-            "Position": "5"
+            "Position": "7"
           }
         },
         {
@@ -865,7 +851,7 @@
           "Settings": {
             "DisplayName": "Post1",
             "Description": null,
-            "Position": "7"
+            "Position": "8"
           }
         },
         {
@@ -874,7 +860,7 @@
           "Settings": {
             "DisplayName": "Post2",
             "Description": null,
-            "Position": "8"
+            "Position": "9"
           }
         },
         {
@@ -883,7 +869,7 @@
           "Settings": {
             "DisplayName": "Post3",
             "Description": null,
-            "Position": "9"
+            "Position": "10"
           }
         },
         {
@@ -892,7 +878,7 @@
           "Settings": {
             "DisplayName": "Post4",
             "Description": null,
-            "Position": "10"
+            "Position": "11"
           }
         },
         {
@@ -901,21 +887,32 @@
           "Settings": {
             "DisplayName": "Post5",
             "Description": null,
-            "Position": "11"
+            "Position": "12"
           }
         },
         {
-          "PartName": "SearchAPart",
-          "Name": "SearchAPart",
+          "PartName": "ValueForSortingOnePart",
+          "Name": "ValueForSortingOnePart",
           "Settings": {
-            "Position": "1"
+            "Position": "1",
+            "DisplayName": null,
+            "Description": null,
+            "Editor": null,
+            "GraphQLContentTypePartSettings": {}
           }
         },
         {
-          "PartName": "SearchBPart",
-          "Name": "SearchBPart",
+          "PartName": "ValueForSortingThreePart",
+          "Name": "ValueForSortingThreePart",
           "Settings": {
-            "Position": "6"
+            "Position": "2"
+          }
+        },
+        {
+          "PartName": "ValueForSortingTwoPart",
+          "Name": "ValueForSortingTwoPart",
+          "Settings": {
+            "Position": "3"
           }
         }
       ]
@@ -2390,5 +2387,5 @@
       "ContentPartFieldDefinitionRecords": []
     }
   ],
-  "Serial": 1415
+  "Serial": 1455
 }

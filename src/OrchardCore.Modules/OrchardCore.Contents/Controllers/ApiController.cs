@@ -323,7 +323,7 @@ namespace OrchardCore.Content.Controllers
 
             string followerChart = Convert.ToString(jsonObj["Influencer"]["FollowerChart"]["Text"]);
             string chartDate = Convert.ToString(jsonObj["Influencer"]["ChartCategoryDate"]["Text"]);
-            followerChart = followerChart + ";" +  followerAndPhotoModel.NumberOfFollowers;
+            followerChart = followerChart + ";" + followerAndPhotoModel.NumberOfFollowers;
             chartDate = chartDate + ";" + followerAndPhotoModel.ChartDate;
 
             jsonObj["Influencer"]["NumberOfFollowers"]["Value"] = followerAndPhotoModel.NumberOfFollowers;
@@ -503,7 +503,7 @@ namespace OrchardCore.Content.Controllers
             jsonObj["GenderDemorgraphic"]["GenderGraphicName"]["Text"] = displayModel.Gender;
             jsonObj["GeoDemorgraphic"]["GeoGraphicName"]["Text"] = displayModel.Location;
             jsonObj["Influencer"]["Description"]["Text"] = displayModel.Description;
-            jsonObj["SearchAPart"]["SearchA"] = displayModel.Gender + ";" + displayModel.Location;
+            //jsonObj["SearchAPart"]["SearchA"] = displayModel.Gender + ";" + displayModel.Location;
 
             contentItem.DisplayText = displayModel.DisplayText;
             contentItem.ModifiedUtc = DateTime.Now;
@@ -608,6 +608,9 @@ namespace OrchardCore.Content.Controllers
                     return Unauthorized();
                 }
             }
+
+            //dynamic jsonObj = contentItem.Content;
+            //jsonObj["Brand"]["FullName"]["Text"] = updateBrandModel.FullName;
 
             var section = _shellConfiguration.GetSection("OrchardCore.Media");
 

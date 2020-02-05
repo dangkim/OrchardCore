@@ -38,7 +38,10 @@ namespace OrchardCore.ContentManagement.Models
         public string NumberOfTotalComment { get; set; }
         public string NumberOfTotalReaction { get; set; }
         public string NumberOfTotalShare { get; set; }
-        public string NumberOfPost { get; set; }        
+        public string NumberOfPost { get; set; }
+        public int SortingValueOne { get; set; }
+        public int SortingValueTwo { get; set; }
+        public int SortingValueThree { get; set; }
     }
 
     public class UpdateBrandModel
@@ -49,6 +52,10 @@ namespace OrchardCore.ContentManagement.Models
         public string BusinessAreas { get; set; }
         public string Phone { get; set; }
         public string Location { get; set; }
+
+        public int SortingValueOne { get; set; }
+        public int SortingValueTwo { get; set; }
+        public int SortingValueThree { get; set; }
     }
 
     public class PostModel
@@ -61,6 +68,9 @@ namespace OrchardCore.ContentManagement.Models
         public string Time { get; set; }
         public string Title { get; set; }
         public string Type { get; set; }
+        public int SortingValueOne { get; set; }
+        public int SortingValueTwo { get; set; }
+        public int SortingValueThree { get; set; }
     }
 
     public class UpdateDisplayModel
@@ -70,6 +80,9 @@ namespace OrchardCore.ContentManagement.Models
         public string Description { get; set; }
         public string Gender { get; set; }
         public string Location { get; set; }
+        public int SortingValueOne { get; set; }
+        public int SortingValueTwo { get; set; }
+        public int SortingValueThree { get; set; }
     }
 
     public class ChangePasswordModel
