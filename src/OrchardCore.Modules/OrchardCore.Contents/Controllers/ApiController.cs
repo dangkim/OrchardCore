@@ -188,6 +188,14 @@ namespace OrchardCore.Content.Controllers
                 await _contentManager.CreateAsync(newContentItem, VersionOptions.DraftRequired);
 
                 contentItem = newContentItem;
+
+                dynamic jsonObj = contentItem.Content;
+
+                if (jsonObj["Brand"]["Avatar"]["Paths"].Count > 0)
+                {
+                    jsonObj["Brand"]["Avatar"]["Paths"].Clear();
+                    jsonObj["Brand"]["Avatar"]["Paths"].Add("team/" + contentItem.ContentItemId + ".png");
+                }
             }
             else
             {
@@ -608,9 +616,6 @@ namespace OrchardCore.Content.Controllers
                     return Unauthorized();
                 }
             }
-
-            //dynamic jsonObj = contentItem.Content;
-            //jsonObj["Brand"]["FullName"]["Text"] = updateBrandModel.FullName;
 
             var section = _shellConfiguration.GetSection("OrchardCore.Media");
 
