@@ -668,6 +668,8 @@ namespace OrchardCore.Content.Controllers
                         await _mediaFileStore.CreateFileFromStream(mediaFilePath, stream, true);
                     }
 
+                    await _contentManager.PublishAsync(contentItem);
+
                     var mediaFile = await _mediaFileStore.GetFileInfoAsync(mediaFilePath);
 
                     result = new
