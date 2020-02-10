@@ -191,6 +191,12 @@ namespace OrchardCore.Content.Controllers
 
                 dynamic jsonObj = contentItem.Content;
 
+                if (jsonObj["Brand"]["Avatar"]["Urls"].Count > 0)
+                {
+                    jsonObj["Brand"]["Avatar"]["Urls"].Clear();
+                    jsonObj["Brand"]["Avatar"]["Urls"].Add("/media/team/" + contentItem.ContentItemId + ".png");
+                }
+
                 if (jsonObj["Brand"]["Avatar"]["Paths"].Count > 0)
                 {
                     jsonObj["Brand"]["Avatar"]["Paths"].Clear();
@@ -214,6 +220,10 @@ namespace OrchardCore.Content.Controllers
                 contentItem.CreatedUtc = newContentItem.CreatedUtc;
                 contentItem.Owner = newContentItem.Owner;
                 contentItem.Author = newContentItem.Author;
+                if (!draft)
+                {
+                    contentItem.Published = true;
+                }
 
                 contentItem.Apply(newContentItem);
 
