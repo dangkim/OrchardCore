@@ -171,7 +171,7 @@ namespace OrchardCore.Content.Controllers
         [ActionName("Post")]
         public async Task<IActionResult> Post(ContentItem newContentItem, bool draft = false)
         {
-            var contentItem = await _contentManager.GetAsync(newContentItem.ContentItemId, VersionOptions.DraftRequired);
+            var contentItem = await _contentManager.GetAsync(newContentItem.ContentItemId);
 
             if (contentItem == null)
             {
@@ -191,17 +191,20 @@ namespace OrchardCore.Content.Controllers
 
                 dynamic jsonObj = contentItem.Content;
 
-                if (jsonObj["Brand"]["Avatar"]["Urls"].Count > 0)
+                if (contentItem.ContentType == "Brand")
                 {
-                    jsonObj["Brand"]["Avatar"]["Urls"].Clear();
-                    jsonObj["Brand"]["Avatar"]["Urls"].Add("/media/team/" + contentItem.ContentItemId + ".png");
-                }
+                    if (jsonObj["Brand"]["Avatar"]["Urls"].Count > 0)
+                    {
+                        jsonObj["Brand"]["Avatar"]["Urls"].Clear();
+                        jsonObj["Brand"]["Avatar"]["Urls"].Add("/media/team/" + contentItem.ContentItemId + ".png");
+                    }
 
-                if (jsonObj["Brand"]["Avatar"]["Paths"].Count > 0)
-                {
-                    jsonObj["Brand"]["Avatar"]["Paths"].Clear();
-                    jsonObj["Brand"]["Avatar"]["Paths"].Add("team/" + contentItem.ContentItemId + ".png");
-                }
+                    if (jsonObj["Brand"]["Avatar"]["Paths"].Count > 0)
+                    {
+                        jsonObj["Brand"]["Avatar"]["Paths"].Clear();
+                        jsonObj["Brand"]["Avatar"]["Paths"].Add("team/" + contentItem.ContentItemId + ".png");
+                    }
+                }                
             }
             else
             {
@@ -277,7 +280,7 @@ namespace OrchardCore.Content.Controllers
         [EnableCors("MyPolicy")]
         public async Task<IActionResult> Post03(UpdateInfluencerModel influencerCostModel, bool draft = false)
         {
-            var contentItem = await _contentManager.GetAsync(influencerCostModel.ContentItemId, VersionOptions.DraftRequired);
+            var contentItem = await _contentManager.GetAsync(influencerCostModel.ContentItemId);
 
             if (contentItem == null)
             {
@@ -321,7 +324,7 @@ namespace OrchardCore.Content.Controllers
         [EnableCors("MyPolicy")]
         public async Task<IActionResult> UpdateFollowerAndPhoto(UpdateFollowerAndPhotoModel followerAndPhotoModel, bool draft = false)
         {
-            var contentItem = await _contentManager.GetAsync(followerAndPhotoModel.ContentItemId, VersionOptions.DraftRequired);
+            var contentItem = await _contentManager.GetAsync(followerAndPhotoModel.ContentItemId);
 
             if (contentItem == null)
             {
@@ -380,7 +383,7 @@ namespace OrchardCore.Content.Controllers
         [EnableCors("MyPolicy")]
         public async Task<IActionResult> UpdatePosts(UpdatePostModel updatePostModel, bool draft = false)
         {
-            var contentItem = await _contentManager.GetAsync(updatePostModel.ContentItemId, VersionOptions.DraftRequired);
+            var contentItem = await _contentManager.GetAsync(updatePostModel.ContentItemId);
 
             if (contentItem == null)
             {
@@ -451,7 +454,7 @@ namespace OrchardCore.Content.Controllers
         [EnableCors("MyPolicy")]
         public async Task<IActionResult> UpdateVideos(UpdateVideoModel videoModel, bool draft = false)
         {
-            var contentItem = await _contentManager.GetAsync(videoModel.ContentItemId, VersionOptions.DraftRequired);
+            var contentItem = await _contentManager.GetAsync(videoModel.ContentItemId);
 
             if (contentItem == null)
             {
@@ -503,7 +506,7 @@ namespace OrchardCore.Content.Controllers
         [EnableCors("MyPolicy")]
         public async Task<IActionResult> UpdateDisplayText(UpdateDisplayModel displayModel, bool draft = false)
         {
-            var contentItem = await _contentManager.GetAsync(displayModel.ContentItemId, VersionOptions.DraftRequired);
+            var contentItem = await _contentManager.GetAsync(displayModel.ContentItemId);
 
             if (contentItem == null)
             {
@@ -566,7 +569,7 @@ namespace OrchardCore.Content.Controllers
         [EnableCors("MyPolicy")]
         public async Task<IActionResult> UpdateBrand(UpdateBrandModel updateBrandModel, bool draft = false)
         {
-            var contentItem = await _contentManager.GetAsync(updateBrandModel.ContentItemId, VersionOptions.DraftRequired);
+            var contentItem = await _contentManager.GetAsync(updateBrandModel.ContentItemId);
 
             if (contentItem == null)
             {
@@ -612,7 +615,7 @@ namespace OrchardCore.Content.Controllers
         {
             var path = "team";
 
-            var contentItem = await _contentManager.GetAsync(uploadAvatarModel.ContentItemId, VersionOptions.DraftRequired);
+            var contentItem = await _contentManager.GetAsync(uploadAvatarModel.ContentItemId);
 
             if (contentItem == null)
             {
