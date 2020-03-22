@@ -204,7 +204,7 @@ namespace OrchardCore.Content.Controllers
                         jsonObj["Brand"]["Avatar"]["Paths"].Clear();
                         jsonObj["Brand"]["Avatar"]["Paths"].Add("team/" + contentItem.ContentItemId + ".png");
                     }
-                }                
+                }
             }
             else
             {
@@ -630,6 +630,8 @@ namespace OrchardCore.Content.Controllers
                 }
             }
 
+            dynamic jsonObj = contentItem.Content;
+
             var section = _shellConfiguration.GetSection("OrchardCore.Media");
 
             // var maxUploadSize = section.GetValue("MaxRequestBodySize", 100_000_000);
@@ -680,6 +682,49 @@ namespace OrchardCore.Content.Controllers
                     {
                         await _mediaFileStore.CreateFileFromStream(mediaFilePath, stream, true);
                     }
+
+                    if (contentItem.ContentType == "Brand")
+                    {
+                        if (jsonObj["Brand"]["Avatar"]["Urls"] != null)
+                        {
+                            if (jsonObj["Brand"]["Avatar"]["Urls"].Count > 0)
+                            {
+                                jsonObj["Brand"]["Avatar"]["Urls"].Clear();
+                                jsonObj["Brand"]["Avatar"]["Urls"].Add("/media/team/" + fileName);
+                            }
+                        }
+                        else
+                        {
+                            var array = new JArray
+                            {
+                                "/media/team/" + fileName
+                            };
+
+                            jsonObj["Brand"]["Avatar"]["Urls"] = array;
+                        }
+
+                        if (jsonObj["Brand"]["Avatar"]["Paths"] != null)
+                        {
+                            if (jsonObj["Brand"]["Avatar"]["Paths"].Count > 0)
+                            {
+                                jsonObj["Brand"]["Avatar"]["Paths"].Clear();
+                                jsonObj["Brand"]["Avatar"]["Paths"].Add("team/" + fileName);
+                            }
+                        }
+                        else
+                        {
+                            var array = new JArray
+                            {
+                                "team/" + fileName
+                            };
+
+                            jsonObj["Brand"]["Avatar"]["Paths"] = array;
+                        }
+
+
+                    }
+
+                    await _contentManager.UpdateAsync(contentItem);
 
                     await _contentManager.PublishAsync(contentItem);
 
