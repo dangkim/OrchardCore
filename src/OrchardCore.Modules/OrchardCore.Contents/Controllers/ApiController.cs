@@ -168,6 +168,28 @@ namespace OrchardCore.Content.Controllers
 
         [HttpPost]
         [EnableCors("MyPolicy")]
+        [ActionName("DeleteCampaign")]
+        public async Task<IActionResult> DeleteCampaign(DeleteCampaignModel deleteCampaignModel)
+        {
+            var contentItem = await _contentManager.GetAsync(deleteCampaignModel.ContentItemId, VersionOptions.Latest);
+
+            if (contentItem == null)
+            {
+                return StatusCode(204);
+            }
+
+            if (!await _authorizationService.AuthorizeAsync(User, Permissions.DeleteOwnContent, contentItem))
+            {
+                return Unauthorized();
+            }
+
+            await _contentManager.RemoveAsync(contentItem);
+
+            return Ok(contentItem);
+        }
+
+        [HttpPost]
+        [EnableCors("MyPolicy")]
         [ActionName("Post")]
         public async Task<IActionResult> Post(ContentItem newContentItem, bool draft = false)
         {
@@ -315,6 +337,57 @@ namespace OrchardCore.Content.Controllers
             {
                 await _contentManager.PublishAsync(contentItem);
             }
+
+            return Ok(contentItem);
+        }
+
+        [HttpPost]
+        [ActionName("UpdateCampaign")]
+        [EnableCors("MyPolicy")]
+        public async Task<IActionResult> UpdateCampaign(UpdateCampaignModel updateCampaignModel, bool draft = false)
+        {
+            var contentItem = await _contentManager.GetAsync(updateCampaignModel.ContentItemId, VersionOptions.Latest);
+
+            if (contentItem == null)
+            {
+                return StatusCode(204);
+            }
+            else
+            {
+                if (!await _authorizationService.AuthorizeAsync(User, Permissions.EditOwnContent, contentItem))
+                {
+                    return Unauthorized();
+                }
+            }
+
+            dynamic jsonObj = contentItem.Content;
+            jsonObj["Campaign"]["CampaignTarget"]["Text"] = updateCampaignModel.CampaignTarget;
+            jsonObj["Campaign"]["CampaignName"]["Text"] = updateCampaignModel.CampaignName;
+            jsonObj["Campaign"]["Budget"]["Value"] = updateCampaignModel.Budget;
+            jsonObj["Campaign"]["Description"]["Text"] = updateCampaignModel.Description;
+
+            jsonObj["Campaign"]["FromAge"]["Value"] = updateCampaignModel.FromAge;
+            jsonObj["Campaign"]["ToAge"]["Value"] = updateCampaignModel.ToAge;
+            jsonObj["Campaign"]["FromDate"]["Value"] = updateCampaignModel.FromDate;
+            jsonObj["Campaign"]["ToDate"]["Value"] = updateCampaignModel.ToDate;
+
+            // Engagement
+            //jsonObj["SearchBPart"]["SearchB"]["Text"] = updatePostModel.NumberOfTotalReaction + (Int32.Parse(updatePostModel.NumberOfTotalComment) * 2) + (Int32.Parse(updatePostModel.NumberOfTotalShare) * 3);
+            contentItem.DisplayText = updateCampaignModel.CampaignName + ";" + updateCampaignModel.InfluencerFullName + ";" + updateCampaignModel.BrandName;
+            contentItem.ModifiedUtc = DateTime.Now;
+            contentItem.Latest = true;
+            
+            await _contentManager.UpdateAsync(contentItem);
+            
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            //if (!draft)
+            //{
+            //    await _contentManager.PublishAsync(contentItem);
+            //}
 
             return Ok(contentItem);
         }

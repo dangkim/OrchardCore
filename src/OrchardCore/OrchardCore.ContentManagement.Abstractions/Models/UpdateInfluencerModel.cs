@@ -16,6 +16,11 @@ namespace OrchardCore.ContentManagement.Models
         public string LiveStreamCost { get; set; }
     }
 
+    public class DeleteCampaignModel
+    {
+        public string ContentItemId { get; set; }
+    }
+
     public class UpdateFollowerAndPhotoModel
     {
         public string ContentItemId { get; set; }
@@ -42,6 +47,22 @@ namespace OrchardCore.ContentManagement.Models
         public int SortingValueOne { get; set; }
         public int SortingValueTwo { get; set; }
         public int SortingValueThree { get; set; }
+    }
+
+    public class UpdateCampaignModel
+    {
+        public string ContentItemId { get; set; }
+        public int Budget { get; set; }
+        public string CampaignName { get; set; }
+        public string CampaignTarget { get; set; }
+        public string FromAge { get; set; }
+        public int ToAge { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string Description { get; set; }
+        public string BrandName { get; set; }
+        public string InfluencerFullName { get; set; }
+
     }
 
     public class UpdateBrandModel
