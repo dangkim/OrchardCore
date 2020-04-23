@@ -293,7 +293,13 @@ namespace OrchardCore.Content.Controllers
             }
             else
             {
-                return StatusCode(204);
+                //if (!ModelState.IsValid)
+                //{
+                return BadRequest(ModelState);
+                //}
+                //var error = new { message = ModelState.Values.FirstOrDefault().Errors.FirstOrDefault().ErrorMessage }; //<-- anonymous object
+                //return this.Content(HttpStatusCode.Conflict, error);
+                //return Json(new { message = ModelState.Values.FirstOrDefault().Errors.FirstOrDefault().ErrorMessage });
             }
         }
 
@@ -376,9 +382,9 @@ namespace OrchardCore.Content.Controllers
             contentItem.DisplayText = updateCampaignModel.CampaignName + ";" + updateCampaignModel.InfluencerFullName + ";" + updateCampaignModel.BrandName;
             contentItem.ModifiedUtc = DateTime.Now;
             contentItem.Latest = true;
-            
+
             await _contentManager.UpdateAsync(contentItem);
-            
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

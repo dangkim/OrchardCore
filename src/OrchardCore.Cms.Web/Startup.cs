@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace OrchardCore.Cms.Web
@@ -9,6 +10,15 @@ namespace OrchardCore.Cms.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOrchardCms();
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredUniqueChars = 1;
+                options.Password.RequiredLength = 6;
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
