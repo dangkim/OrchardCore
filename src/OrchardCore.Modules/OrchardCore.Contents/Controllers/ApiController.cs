@@ -694,7 +694,7 @@ namespace OrchardCore.Content.Controllers
         {
             var path = "team";
 
-            var contentItem = await _contentManager.GetAsync(uploadAvatarModel.ContentItemId);
+            var contentItem = await _contentManager.GetAsync(uploadAvatarModel.ContentItemId, VersionOptions.Latest);
 
             if (contentItem == null)
             {
