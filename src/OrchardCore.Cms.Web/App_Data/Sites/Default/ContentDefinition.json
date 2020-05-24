@@ -1466,7 +1466,7 @@
           "Name": "FromDate",
           "Settings": {
             "DisplayName": "Campaign From",
-            "Position": "13"
+            "Position": "16"
           }
         },
         {
@@ -1474,7 +1474,7 @@
           "Name": "ToDate",
           "Settings": {
             "DisplayName": "Campaign To",
-            "Position": "14"
+            "Position": "17"
           }
         },
         {
@@ -1482,7 +1482,7 @@
           "Name": "ProductInfo",
           "Settings": {
             "DisplayName": "Product Info",
-            "Position": "15"
+            "Position": "18"
           }
         },
         {
@@ -1490,7 +1490,7 @@
           "Name": "Budget",
           "Settings": {
             "DisplayName": "Budget",
-            "Position": "16"
+            "Position": "19"
           }
         },
         {
@@ -1498,7 +1498,7 @@
           "Name": "Currency",
           "Settings": {
             "DisplayName": "Currency",
-            "Position": "17"
+            "Position": "20"
           }
         },
         {
@@ -1506,7 +1506,7 @@
           "Name": "CampaignName",
           "Settings": {
             "DisplayName": "Campaign Name",
-            "Position": "12"
+            "Position": "15"
           }
         },
         {
@@ -1514,7 +1514,7 @@
           "Name": "MarketPlace",
           "Settings": {
             "DisplayName": "MarketPlace",
-            "Position": "8"
+            "Position": "11"
           }
         },
         {
@@ -1522,7 +1522,7 @@
           "Name": "FromAge",
           "Settings": {
             "DisplayName": "FromAge",
-            "Position": "9"
+            "Position": "12"
           }
         },
         {
@@ -1530,7 +1530,7 @@
           "Name": "ToAge",
           "Settings": {
             "DisplayName": "ToAge",
-            "Position": "10"
+            "Position": "13"
           }
         },
         {
@@ -1538,7 +1538,7 @@
           "Name": "Gender",
           "Settings": {
             "DisplayName": "Gender",
-            "Position": "11"
+            "Position": "14"
           }
         },
         {
@@ -1546,7 +1546,7 @@
           "Name": "HashTag",
           "Settings": {
             "DisplayName": "HashTag",
-            "Position": "4"
+            "Position": "7"
           }
         },
         {
@@ -1554,7 +1554,7 @@
           "Name": "Keyword",
           "Settings": {
             "DisplayName": "Keyword",
-            "Position": "5"
+            "Position": "8"
           }
         },
         {
@@ -1562,7 +1562,7 @@
           "Name": "Link",
           "Settings": {
             "DisplayName": "Link",
-            "Position": "6"
+            "Position": "9"
           }
         },
         {
@@ -1570,7 +1570,7 @@
           "Name": "Description",
           "Settings": {
             "DisplayName": "Description",
-            "Position": "7"
+            "Position": "10"
           }
         },
         {
@@ -1578,7 +1578,7 @@
           "Name": "Interesting",
           "Settings": {
             "DisplayName": "Interesting",
-            "Position": "3"
+            "Position": "6"
           }
         },
         {
@@ -1586,7 +1586,7 @@
           "Name": "JobName",
           "Settings": {
             "DisplayName": "JobName",
-            "Position": "1"
+            "Position": "4"
           }
         },
         {
@@ -1594,7 +1594,31 @@
           "Name": "StatusOfCampaign",
           "Settings": {
             "DisplayName": "StatusOfCampaign",
+            "Position": "5"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "BrandFullName",
+          "Settings": {
+            "DisplayName": "BrandFullName",
+            "Position": "1"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "PhoneNumber",
+          "Settings": {
+            "DisplayName": "PhoneNumber",
             "Position": "2"
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Email",
+          "Settings": {
+            "DisplayName": "Email",
+            "Position": "3"
           }
         }
       ]
@@ -2387,5 +2411,5 @@
       "ContentPartFieldDefinitionRecords": []
     }
   ],
-  "Serial": 1455
+  "Serial": 1469
 }

@@ -62,7 +62,12 @@ namespace OrchardCore.ContentManagement.Models
         public string Description { get; set; }
         public string BrandName { get; set; }
         public string InfluencerFullName { get; set; }
+    }
 
+    public class UpdateCampaignStatusModel
+    {
+        public List<string> ContentItemIds { get; set; }
+        public int Status { get; set; }
     }
 
     public class UpdateBrandModel

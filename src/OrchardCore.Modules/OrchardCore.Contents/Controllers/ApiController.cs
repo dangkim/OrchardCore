@@ -7,16 +7,12 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Models;
-using OrchardCore.Contents;
-using OrchardCore.Contents.Models;
 using OrchardCore.Environment.Shell.Configuration;
 using OrchardCore.FileStorage;
 using OrchardCore.Media;
@@ -390,13 +386,48 @@ namespace OrchardCore.Content.Controllers
                 return BadRequest(ModelState);
             }
 
-            //if (!draft)
-            //{
-            //    await _contentManager.PublishAsync(contentItem);
-            //}
-
             return Ok(contentItem);
         }
+
+        [HttpPost]
+        [ActionName("UpdateCampaignStatus")]
+        [EnableCors("MyPolicy")]
+        public async Task<IActionResult> UpdateCampaignStatus(UpdateCampaignStatusModel updateCampaignStatusModel, bool draft = false)
+        {
+            foreach (var item in updateCampaignStatusModel.ContentItemIds)
+            {
+                var contentItem = await _contentManager.GetAsync(item, VersionOptions.Latest);
+
+                if (contentItem == null)
+                {
+                    return StatusCode(204);
+                }
+                else
+                {
+                    if (!await _authorizationService.AuthorizeAsync(User, Permissions.EditOwnContent, contentItem))
+                    {
+                        return Unauthorized();
+                    }
+                }
+
+                dynamic jsonObj = contentItem.Content;
+                jsonObj["Campaign"]["StatusOfCampaign"]["Value"] = updateCampaignStatusModel.Status;
+                
+                contentItem.ModifiedUtc = DateTime.Now;
+                contentItem.Latest = true;
+
+                await _contentManager.UpdateAsync(contentItem);
+
+            }
+            
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok();
+        }
+
 
         [HttpPost]
         [ActionName("UpdateFollowerAndPhoto")]
@@ -637,6 +668,16 @@ namespace OrchardCore.Content.Controllers
             if (User.HasClaim("Permission", "EditOwn_Influencer"))
             {
                 return Ok("Influencer");
+            }
+
+            if (User.IsInRole("Moderator"))
+            {
+                return Ok("Moderator");
+            }
+
+            if (User.IsInRole("Administrator"))
+            {
+                return Ok("Administrator");
             }
 
             return StatusCode(204);
